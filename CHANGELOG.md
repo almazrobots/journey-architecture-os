@@ -40,6 +40,10 @@ Run `make validate` on your journey systems after migrating; errors point to `fi
 - Evaluations (`evals/`, `scripts/run_evals.py`): routing against 14 overlapping distractor skills with held-out cases, and behavior scenarios with subtle traps, run with and without the skill and graded by a judge that does not see which condition produced the answer. Results are refused from an uncommitted tree.
 - `service-blueprinting` description sharpened after routing evals showed requests phrased as "process map" going to a generic process-mapping skill.
 
+### Known issues
+- Behavior evals do not yet show a statistically clear gain on method traps (+5.6 pp, 95% CI −2.2 to +15.6); the gain on conventions is clear. See `evals/results/`.
+- With `journey-quality-audit` loaded, the model missed NPS used as a stage metric in 2 of 3 runs (scenario BH-08).
+
 ## 1.0.0 — 2026-09-24
 
 - Initial public release of Journey Architecture OS.
