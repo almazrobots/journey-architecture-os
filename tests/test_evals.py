@@ -412,12 +412,15 @@ class IntegrityTests(unittest.TestCase):
         if shutil.which("git") is None:
             self.skipTest("git not available")
         self.tmp = Path(tempfile.mkdtemp())
-        self.addCleanup(shutil.rmtree, self.tmp)
+        # git may run background maintenance that writes into .git while it is being removed
+        self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.repo = self.tmp / "repo"
         shutil.copytree(ROOT, self.repo, ignore=shutil.ignore_patterns(".git", "__pycache__", "results", ".venv"))
         routing = self.repo / "evals" / "routing.jsonl"
         routing.write_text("\n".join(routing.read_text().splitlines()[:3]) + "\n")
         self.git("init", "-q")
+        for key, value in (("gc.auto", "0"), ("maintenance.auto", "false"), ("core.fsmonitor", "false")):
+            self.git("config", key, value)
         self.git("add", "-A")
         self.git("-c", "user.name=t", "-c", "user.email=t@example.invalid", "commit", "-q", "-m", "snapshot")
         self.state = self.tmp / "state"
