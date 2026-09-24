@@ -1,5 +1,7 @@
-journey_id,parent_id,level,actor,name,state,status,owner,evidence_freshness
-LFC-CUST-001,,L1,customer,Become and remain a customer,current,active,,current
-JRN-CUST-EVAL-001,LFC-CUST-001,L2,customer,Evaluate the service,current,active,,current
-JRN-CUST-ONBOARD-001,LFC-CUST-001,L2,customer,Start using the service,current,active,,needs-review
-JRN-CUST-SUPPORT-001,LFC-CUST-001,L2,customer,Resolve a service problem,current,active,,current
+journey_id,parent_id,level,actor_id,name,state,status,owner,evidence_freshness,metric_coverage,linked_opportunities,linked_initiatives,last_reviewed_at
+DOM-TELCO-CUSTOMER-001,,L0,,Mobile customer relationship,current,active,Chief Customer Officer,current,,,,2026-06-30
+LFC-CUST-TELCO-SUBSCRIBER-001,DOM-TELCO-CUSTOMER-001,L1,ACT-CUST-TELCO-SUBSCRIBER-01,Become and remain a mobile subscriber,current,active,Chief Customer Officer,current,,,,2026-06-30
+JRN-CUST-TELCO-SWITCH-001,LFC-CUST-TELCO-SUBSCRIBER-001,L2,ACT-CUST-TELCO-SUBSCRIBER-01,Switch to the network and keep my number,current,validated,Head of Sales Operations,current,0.50,OPP-0801,,2026-05-12
+JRN-CUST-TELCO-ACTIVATE-001,LFC-CUST-TELCO-SUBSCRIBER-001,L2,ACT-CUST-TELCO-SUBSCRIBER-01,Get the new line working,current,active,Head of Customer Onboarding,needs-review,0.75,OPP-0811;OPP-0812,INI-0801,2026-03-02
+JRN-CUST-TELCO-ACTIVATE-002,LFC-CUST-TELCO-SUBSCRIBER-001,L2,ACT-CUST-TELCO-SUBSCRIBER-01,Get the new line working (target),target,draft,Head of Customer Onboarding,unknown,0.25,,,2026-07-20
+JRN-CUST-TELCO-RESOLVE-BILL-001,LFC-CUST-TELCO-SUBSCRIBER-001,L2,ACT-CUST-TELCO-SUBSCRIBER-01,Resolve a billing problem,current,stale,Head of Support Operations,stale,0.40,OPP-0821,,2025-11-18

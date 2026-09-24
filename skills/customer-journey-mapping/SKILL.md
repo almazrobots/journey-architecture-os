@@ -1,10 +1,10 @@
 ---
 name: customer-journey-mapping
-description: Creates evidence-backed customer journey maps that model a customer's goals, stages, actions, expectations, touchpoints, channels, friction, workarounds, emotions when evidenced, outcomes, and variations. Use for current-state, day-in-the-life, future-state, or scenario-based CJM work and when translating research into an end-to-end customer experience model.
+description: Creates evidence-backed customer journey maps that model a customer's goals, stages, actions, expectations, touchpoints, channels, friction, workarounds, emotions when evidenced, outcomes, and variations. Use for current-state, transitional, day-in-the-life, or scenario-based CJM work and when translating research into an end-to-end customer experience model; for designing a future-state experience, prefer target-experience-design.
 license: MIT
 metadata:
   author: journey-architecture-os
-  version: "1.0.0"
+  version: "2.0.0"
   domain: experience-architecture
 ---
 
@@ -51,18 +51,22 @@ Do not force all rows when they add no value.
 ### 1. Confirm scope
 State actor, trigger, start, end, desired outcome, and exclusions.
 
-### 2. Choose map state
-Use one of:
+### 2. Choose state and map type
+Set `state` to exactly one of `current`, `target`, or `transitional`; each is a separate journey with its own ID, and a target or transitional map names the current journey it changes in `baseline_journey_id`. Do not blend states.
 
-- current state;
-- target state;
-- transitional state;
-- broader day-in-the-life/context map.
-
-Do not blend states.
+Separately choose the map type: a journey map bounded by the organization's service, or a day-in-the-life/context map when the service is a small part of the customer's wider effort. A context map still has one state. A map built without adequate evidence is a hypothesis map: a research instrument, not a finding.
 
 ### 3. Derive stages
-Stages should represent meaningful progression, not company departments or channels.
+Derive stages from evidence, not from the org chart:
+
+1. Walk each customer's notes in time order and mark boundary signals: goal change, commitment point (costly to reverse), waiting or handoff the customer experiences as a distinct period, knowledge threshold, sub-outcome reached or lost.
+2. Not a boundary on its own: channel change, department or system change, a calendar interval the customer does not organize around. Record these as attributes of a stage.
+3. Keep a boundary when two customers, or one customer plus a non-interview source, show it.
+4. Keep a span between boundaries as a stage only if it passes all four tests: the customer would recognize it; it has its own goal; it ends on an exit condition visible from the customer's side; renaming it after the team or channel serving it would lose meaning.
+5. Loops and retries stay inside a stage. Aim for 3–7 stages in an L2 journey; fewer suggests an episode, more suggests steps.
+6. A stage (L3) is `observed` only when its goal and boundaries are supported by at least two clusters, or by one cluster that draws on at least two independent source types; a stage resting on one cluster from a single source type is at most `inferred`; a stage with no observed evidence is `hypothesis`. A stage is never stronger than its weakest defining finding. Episodes (L4) use a lighter rule: an episode is `observed` when at least one observed finding directly shows its actions, start, and end; otherwise it takes the status of its best supporting finding.
+
+If the `journey-research` skill is installed, its synthesis-to-stages method gives the full procedure with coding and a worked example.
 
 ### 4. Populate behavior first
 Add what the customer actually does before adding emotional interpretation.
@@ -90,20 +94,24 @@ Represent:
 - channel switches.
 
 ### 10. Attach evidence
-Each significant insight should reference evidence IDs.
+Each significant insight should reference `EVD-` evidence IDs.
 
 ### 11. Identify candidate moments
 Do not automatically label every pain point a moment that matters. Route to `moments-that-matter`.
 
 ### 12. Link metrics/opportunities
-Use stable stage/node IDs so metrics and opportunities can live outside the visual map.
+Give each stage a `NOD-` ID so metrics and opportunities can live outside the visual map in their registers.
+
+## Conventions
+
+Follow `references/conventions.md` for IDs, evidence statuses, and register columns.
 
 ## Output contract
 
 Produce:
 
 - journey header;
-- stage table;
+- stage table with `node_id`, `evidence_status`, and `evidence_ids` on every row;
 - variations/branches;
 - evidence gaps;
 - strongest observed frictions;
@@ -123,5 +131,6 @@ Produce:
 
 ## References
 
+Read `references/conventions.md` for IDs, evidence statuses, and register columns.
 Read `references/map-types.md` when choosing map type.
 Use `assets/cjm-template.md`.

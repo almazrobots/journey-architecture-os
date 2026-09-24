@@ -4,7 +4,7 @@ description: Plans, gathers, evaluates, and synthesizes qualitative, behavioral,
 license: MIT
 metadata:
   author: journey-architecture-os
-  version: "1.0.0"
+  version: "2.0.0"
   domain: experience-architecture
 ---
 
@@ -37,12 +37,11 @@ Use a mix when available:
 
 ## Evidence states
 
-Every claim must be labeled:
+Give every claim an `evidence_status` (definitions in `references/conventions.md`). Research-specific rules:
 
-- `observed`;
-- `inferred`;
-- `hypothesis`;
-- `unknown`.
+- the status belongs to the claim, not the source: one analytics export can support an `observed` drop-off and only an `inferred` reason for it;
+- `stakeholder-input` evidence is registered as `hypothesis` or `unknown`, never `observed` or `inferred`;
+- register each material open question as an evidence row with status `unknown` whose `finding` states the question, so gaps are citable.
 
 ## Workflow
 
@@ -79,6 +78,7 @@ For each source record:
 - relevance to the current journey.
 
 ### 5. Fill high-value gaps
+Before any new fieldwork, apply `references/research-ethics.md` (consent, minimization, retention, AI tools on transcripts).
 Prioritize gaps that could change:
 
 - journey scope;
@@ -89,7 +89,7 @@ Prioritize gaps that could change:
 - target-state decision.
 
 ### 6. Synthesize
-Group observations into themes without destroying provenance.
+Group observations into themes without destroying provenance. Follow `references/synthesis-to-stages.md` to unitize, code, cluster, and derive stages.
 
 For each finding record:
 
@@ -118,12 +118,20 @@ Explicitly list unknowns and contradictory evidence.
 ### 9. Hand off to mapping
 Deliver an evidence pack usable by CJM/EJM skills.
 
+## Conventions
+
+Follow `references/conventions.md` for IDs, evidence statuses, and register columns.
+
 ## Output contract
 
 1. Research objective.
 2. Evidence inventory.
 3. Evidence register.
-4. Findings table.
+4. Findings table:
+
+| finding | evidence_ids | journey_id | node_id | actor_context | evidence_status | limitations | implication |
+|---|---|---|---|---|---|---|---|
+
 5. Contradictions.
 6. Unknowns.
 7. Research gaps.
@@ -140,5 +148,8 @@ Deliver an evidence pack usable by CJM/EJM skills.
 
 ## References
 
+Read `references/conventions.md` for IDs, evidence statuses, and register columns.
 Read `references/evidence-model.md`.
+Read `references/synthesis-to-stages.md` when turning raw evidence into findings and a stage model.
+Read `references/research-ethics.md` before collecting or handling participant data.
 Use `assets/evidence-register.csv`.

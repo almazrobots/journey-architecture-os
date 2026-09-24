@@ -4,7 +4,7 @@ description: Establishes operational governance for journey artifacts and outcom
 license: MIT
 metadata:
   author: journey-architecture-os
-  version: "1.0.0"
+  version: "2.0.0"
   domain: experience-architecture
 ---
 
@@ -16,25 +16,12 @@ Make journeys durable decision assets rather than static deliverables.
 
 ## Governance objects
 
-For every managed journey maintain:
+Governance lives in two registers, not in documents:
 
-- stable ID;
-- name and scope;
-- actor;
-- owner;
-- contributors;
-- lifecycle status;
-- current version;
-- evidence window;
-- last review;
-- next review;
-- metric owner(s);
-- evidence steward;
-- linked opportunities;
-- linked initiatives;
-- linked service capabilities;
-- dependency journeys;
-- change log.
+- **Governance register** — one row per managed journey: `journey_id, owner, evidence_steward, metric_owners, review_interval_days, last_reviewed_at, next_review_due, review_triggers, freshness_rule`. Name, actor, state, status, and version stay in the journey registry; linked opportunities and initiatives stay in the portfolio register. Do not copy them.
+- **Change log** — one row per material change: `change_id` (`CHG-{NNNN}`), `journey_id, changed_at, version, change, reason, evidence_ids, affected_node_ids, approved_by`.
+
+Owners are role names, not people. `metric_owners` and `review_triggers` are `;`-separated lists; `next_review_due` is on or after `last_reviewed_at`.
 
 ## Roles
 
@@ -65,37 +52,36 @@ Not every map deserves enterprise governance. Select strategic or reusable journ
 Avoid committees as sole owner.
 
 ### 3. Set lifecycle states
-Recommended:
-- draft;
-- validated;
-- active;
-- stale;
-- archived.
+Use `status`:
+- `draft` — hypothesis-level, not yet evidenced;
+- `validated` — material claims are `observed` or `inferred`;
+- `active` — owned, measured, and used in planning;
+- `stale` — evidence or review is overdue;
+- `archived` — retired; the ID is never reused.
+
+Move between statuses only by the entry criteria and approvers in the transition table of `references/governance-method.md`.
 
 ### 4. Set evidence freshness
-Freshness depends on volatility.
+Record `evidence_freshness` as `current`, `needs-review`, `stale`, or `unknown`. Freshness depends on volatility.
 
 Examples:
 - stable regulated process: longer interval;
 - rapidly changing digital onboarding: shorter interval.
 
+Compute it per evidence row from `collected_at`, source type, and volatility, then roll up by weakest stage, as in `references/governance-method.md` Steps 1–3; the same guide covers trigger actions, change classes, and ownership escalation for steps 5–6.
+
 ### 5. Set review triggers
-Review can be time-based or event-based:
-- major product release;
-- policy change;
-- channel launch;
-- metric shift;
-- incident;
-- organizational change;
-- new research.
+Review is time-based (`review_interval_days`) and event-based. `review_triggers` takes values from: `major-service-change`, `policy-change`, `channel-launch`, `metric-shift`, `incident`, `organizational-change`, `new-research`. State the `freshness_rule` in one line, for example "stale when the newest observed evidence for any stage is older than 12 months".
 
 ### 6. Define change control
-Material change requires:
+Every material change is a change-log row with:
 - reason;
-- evidence;
-- affected nodes;
+- evidence IDs, or an explicit note that the change is not evidence-driven;
+- affected node IDs;
 - version update;
-- owners notified.
+- a named approver role in `approved_by` for each change. The approver is the journey owner unless the change moves a boundary shared with another journey, in which case the domain or portfolio owner approves.
+
+A change is material when it adds, removes, splits, or merges a node, moves a boundary, changes the desired outcome, or changes a claim's `evidence_status`.
 
 ### 7. Link initiatives
 No strategic journey should have an opportunity backlog disconnected from delivery planning.
@@ -103,16 +89,19 @@ No strategic journey should have an opportunity backlog disconnected from delive
 ### 8. Define operating cadence
 Journey review should enter existing planning/review forums where possible.
 
+## Conventions
+
+Follow `references/conventions.md` for IDs, evidence statuses, and register columns.
+
 ## Output contract
 
 Create:
-- governance charter;
+- governance register rows for every managed journey;
+- change-log rows for every material change, each with an approver;
 - RACI-like role model;
-- journey lifecycle;
-- review cadence;
-- freshness rules;
-- change log;
-- minimum metadata standard.
+- journey lifecycle (`status` transitions and who may make them);
+- review cadence and freshness rules;
+- governance forum and escalation path for ownership conflicts.
 
 ## Quality gates
 
@@ -120,9 +109,13 @@ Create:
 - ownership is not confused with touchpoint control;
 - review triggers are explicit;
 - stale journeys can be detected;
+- every change-log row has reason, evidence or an explicit no-evidence note, affected nodes, and an approver;
 - changes preserve evidence provenance;
 - journey links to metrics and initiatives.
 
 ## References
 
-Use `assets/governance-record.yaml`.
+Read `references/conventions.md` for IDs, evidence statuses, and register columns.
+Use `assets/governance-register.csv` for owners, review cadence, and triggers.
+Use `assets/change-log.csv` to record every material change.
+Read `references/governance-method.md` before setting freshness rules, changing a journey's status, or approving a change.

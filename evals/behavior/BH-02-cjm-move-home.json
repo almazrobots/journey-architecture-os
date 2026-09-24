@@ -1,0 +1,51 @@
+{
+  "id": "BH-02-cjm-move-home",
+  "skill": "customer-journey-mapping",
+  "prompt": "We need a customer journey for people moving home. Here's what the team pulled together. Can you build it?",
+  "input_material": "BrightGrid (energy supplier), residential customers moving home.\n\nTeam draft of the journey: Sales -> Onboarding team -> Metering -> Billing -> Collections.\n\nInterview notes (n=10 recent movers, Jan 2026):\n- Most searched \"move energy supplier\" and landed on a help article first.\n- 6 of 10 phoned because the online form asked for a meter reading they did not have yet.\n- Customers submit their final meter reading in the app, which closes the old account automatically.\n- 3 of 10 disputed their final bill at the old address.\n\nOperations data (2025):\n- Time from move date to final bill: median 19 days overall.\n- By meter type: smart meters median 6 days (58% of movers); legacy meters median 37 days (42% of movers), with 3x the dispute rate.\n\nApp roadmap (product team): \"Q4 2026 - final meter reading submission in app, with automatic closure of the old account.\" ",
+  "notes": "Traps: stages from department handoffs; target-state capability written as a current-state interview note; overall median hides a segment split.",
+  "assertions": [
+    {
+      "id": "ids-follow-ontology-grammar",
+      "type": "regex",
+      "category": "convention",
+      "description": "At least one ontology ID appears, and every ID-like token matches the ontology ID grammar (both read from ontology.md at run time).",
+      "pattern": "@ontology-id-finder",
+      "every_match": "@ontology-id-grammar"
+    },
+    {
+      "id": "four-evidence-statuses",
+      "type": "regex",
+      "category": "convention",
+      "flags": "i",
+      "description": "All four evidence_status values from the ontology appear.",
+      "all_of": [
+        "\\bobserved\\b",
+        "\\binferred\\b",
+        "\\bhypothes[ie]s\\b",
+        "\\bunknown\\b"
+      ]
+    },
+    {
+      "id": "stages-not-departments",
+      "type": "judge",
+      "category": "method",
+      "question": "Are the journey stages expressed as the customer's progress rather than the team draft's department handoffs (Sales, Onboarding team, Metering, Billing, Collections)?",
+      "pass_criteria": "PASS if the stages describe what the mover is trying to achieve (e.g. arrange supply for the new home, hand over the old home, settle the final bill) and departments appear, if at all, as backstage owners. FAIL if the stages are, or are renamed versions of, the department sequence."
+    },
+    {
+      "id": "roadmap-not-current",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response notice that 'customers submit their final reading in the app, which closes the old account automatically' is a Q4 2026 roadmap capability, and keep it out of the current-state journey?",
+      "pass_criteria": "PASS only if the automatic in-app closure is excluded from the current state or explicitly flagged as a future/roadmap item conflicting with the interview notes. FAIL if the current-state map describes customers closing the old account automatically through the app."
+    },
+    {
+      "id": "segment-split",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the map treat smart-meter and legacy-meter movers as distinct variations rather than describing the final-bill stage with the 19-day overall median?",
+      "pass_criteria": "PASS only if the meter-type split (6 vs 37 days, higher disputes for legacy) is represented as a branch, variation, or segment in the journey. FAIL if the final-bill experience is characterised mainly by the overall 19-day median."
+    }
+  ]
+}

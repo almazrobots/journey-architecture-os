@@ -4,7 +4,7 @@ description: Identifies and validates moments that have disproportionate influen
 license: MIT
 metadata:
   author: journey-architecture-os
-  version: "1.0.0"
+  version: "2.0.0"
   domain: experience-architecture
 ---
 
@@ -46,21 +46,16 @@ From research, journey map, service blueprint, metrics, complaints, and critical
 A moment matters because of an outcome.
 
 ### 3. Attach evidence
-Use evidence IDs and metric signals.
+Cite `EVD-` evidence IDs and `MET-` metric IDs. A moment whose consequence is only asserted by stakeholders stays a candidate.
 
 ### 4. Distinguish types
-Useful labels:
-- decision moment;
-- trust moment;
-- transition moment;
-- recovery moment;
-- capability moment;
-- relationship moment;
-- high-risk moment.
+Assign one `moment_type`: `decision`, `trust`, `transition`, `recovery`, `capability`, `relationship`, or `high-risk`.
 
 ### 5. Test counterfactual
 Ask:
 `If this moment went exceptionally well or badly, what downstream outcome would materially change?`
+
+Answer it with data where possible: follow `references/moment-analysis.md` for the outcome-conditioned comparison with stratification, critical incidents, key-driver pitfalls, and structural tests (decision, irreversibility, vulnerability).
 
 ### 6. Rank cautiously
 Use evidence and explicit rationale, not decorative scores.
@@ -68,10 +63,18 @@ Use evidence and explicit rationale, not decorative scores.
 ### 7. Define design/operational implication
 What must be protected, improved, or measured?
 
+## Conventions
+
+Follow `references/conventions.md` for IDs, evidence statuses, and register columns.
+
 ## Output contract
 
-| moment | journey_node | outcome_at_stake | why_disproportionate | evidence | metric | failure_consequence | owner |
-|---|---|---|---|---|---|---|---|
+Rows use the moment register columns; `node_id` must exist in the node register.
+
+| moment_id | node_id | moment_type | outcome_at_stake | why_disproportionate | evidence_ids | evidence_status | metric_ids | failure_consequence | owner |
+|---|---|---|---|---|---|---|---|---|---|
+
+Follow with rejected candidates and the reason each was rejected.
 
 ## Quality gates
 
@@ -79,3 +82,9 @@ What must be protected, improved, or measured?
 - every moment has a consequence/outcome rationale;
 - evidence is distinguishable from stakeholder belief;
 - high volume alone is not sufficient.
+
+## References
+
+Read `references/conventions.md` for IDs, evidence statuses, and register columns.
+Use `assets/moment-register.csv` for the moment register.
+Read `references/moment-analysis.md` before claiming a moment is disproportionate, assigning its `evidence_status`, or deciding how many to select.

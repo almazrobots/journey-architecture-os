@@ -4,7 +4,7 @@ description: Audits customer journeys, employee journeys, service blueprints, an
 license: MIT
 metadata:
   author: journey-architecture-os
-  version: "1.0.0"
+  version: "2.0.0"
   domain: experience-architecture
 ---
 
@@ -55,6 +55,9 @@ Solution-independent, evidenced, outcome-linked.
 ### J. Governance
 Owner, version, freshness, review cadence, change history.
 
+### K. Visual/model integrity
+The visual matches the registers (IDs shown, no nodes missing or invented), current and target are not drawn as one path, uncertainty is visually distinguished, and encodings do not imply data that does not exist.
+
 ## AI-slop detection
 
 Red flags:
@@ -79,6 +82,8 @@ Judge against intended decision, not aesthetics.
 ### 2. Audit dimensions
 Provide score + evidence + remediation.
 
+Score with the anchored 0–3 criteria, generic-content tests, and two-auditor procedure in `references/audit-rubric.md`; blockers override scores.
+
 ### 3. Identify critical blockers
 Examples:
 - wrong scope;
@@ -90,12 +95,18 @@ Examples:
 Fix structural/evidence problems before visual polish.
 
 ### 5. Recommend routing
-Point to the exact skill needed for repair.
+For every remediation, name the repair skill by its exact name in the `skill` column: `journey-architecture`, `journey-research`, `jobs-and-outcomes`, `customer-journey-mapping`, `employee-journey-mapping`, `service-blueprinting`, `moments-that-matter`, `journey-metrics`, `experience-opportunity-prioritization`, `target-experience-design`, `journey-governance`, or `journey-portfolio-management`.
+
+## Conventions
+
+Follow `references/conventions.md` for IDs, evidence statuses, and register columns.
 
 ## Output contract
 
-| dimension | score_0_3 | evidence | risk | remediation | skill |
-|---|---:|---|---|---|---|
+| dimension | score_0_3 | finding | evidence_status | evidence_ids | risk | remediation | skill |
+|---|---:|---|---|---|---|---|---|
+
+Label each finding `observed` (visible in the artifact or its sources), `inferred`, `hypothesis`, or `unknown` (not assessable from the material provided).
 
 Then provide:
 - critical blockers;
@@ -112,4 +123,6 @@ Then provide:
 
 ## References
 
+Read `references/conventions.md` for IDs, evidence statuses, and register columns.
 Use `assets/audit-scorecard.md`.
+Read `references/audit-rubric.md` before scoring any dimension or declaring a blocker.

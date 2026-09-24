@@ -1,0 +1,58 @@
+{
+  "id": "BH-03-ejm-field-onboarding",
+  "skill": "employee-journey-mapping",
+  "prompt": "Can you map what the first 90 days look like for our new field technicians? HR sent over the data below.",
+  "input_material": "Liftwell (elevator maintenance), new field service technicians.\n\nHR onboarding workflow: Offer -> Pre-boarding -> Induction day -> Probation review (day 90).\n\nHR dashboard, 2025 vs 2026 H1:\n- Days from start date to working tablet and work-order app: 9 -> 4 (target of 5 met).\n- Technicians signed off to work solo by day 60: 71% -> 58%.\n- 12-month retention of new technicians: 84% -> 76% (2026 figure is a projection from the first 6 months).\n\nOnboarding pulse survey: \"How well does onboarding prepare new technicians?\" average 4.2 / 5. Respondents: 31 people managers.\n\nTechnician interviews (n=6, 2026 hires):\n- \"I shadowed Marco for a week; he showed me more than any course.\"\n- \"My supervisor is on nights, so I learned the escalation rules from a WhatsApp group.\"\n- \"Sign-off keeps getting pushed because there's no senior free to assess me.\" ",
+  "notes": "Traps: operational metric improves while actor outcomes worsen; manager survey used as employee voice; stages from HR workflow; causal story for retention without evidence.",
+  "assertions": [
+    {
+      "id": "ids-follow-ontology-grammar",
+      "type": "regex",
+      "category": "convention",
+      "description": "At least one ontology ID appears, and every ID-like token matches the ontology ID grammar (both read from ontology.md at run time).",
+      "pattern": "@ontology-id-finder",
+      "every_match": "@ontology-id-grammar"
+    },
+    {
+      "id": "four-evidence-statuses",
+      "type": "regex",
+      "category": "convention",
+      "flags": "i",
+      "description": "All four evidence_status values from the ontology appear.",
+      "all_of": [
+        "\\bobserved\\b",
+        "\\binferred\\b",
+        "\\bhypothes[ie]s\\b",
+        "\\bunknown\\b"
+      ]
+    },
+    {
+      "id": "operational-vs-outcome",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response point out that the IT-access time improved while solo sign-off and retention got worse, and decline to treat the IT improvement as evidence that onboarding got better?",
+      "pass_criteria": "PASS only if the divergence between the improved operational metric and the worsening employee outcomes is explicitly called out. FAIL if the 4-day IT access is presented as a success without that contrast, or if the divergence is not mentioned."
+    },
+    {
+      "id": "manager-survey-not-employee-voice",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response notice that the 4.2/5 onboarding score comes from 31 people managers and therefore does not represent the technicians' own experience?",
+      "pass_criteria": "PASS only if the respondent population (managers, not technicians) is named as the reason the score cannot stand for employee experience. FAIL if the score is used as evidence of technician experience or satisfaction, or if its respondent population is not questioned."
+    },
+    {
+      "id": "stages-not-hr-workflow",
+      "type": "judge",
+      "category": "method",
+      "question": "Are the stages built from the technician's progress (e.g. getting equipped, learning on the job, becoming signed off to work solo) rather than the HR workflow (Offer, Pre-boarding, Induction day, Probation review)?",
+      "pass_criteria": "PASS if the stages reflect the technician's progression toward working independently. FAIL if the HR workflow steps are the stage backbone."
+    },
+    {
+      "id": "retention-cause-open",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response avoid asserting why retention fell, and flag that the 2026 retention figure is a projection?",
+      "pass_criteria": "PASS only if any explanation of the retention decline is labelled hypothesis (e.g. sign-off delays as a candidate) AND the projection caveat is mentioned. FAIL if a cause is stated as fact, or the projected figure is treated as measured."
+    }
+  ]
+}

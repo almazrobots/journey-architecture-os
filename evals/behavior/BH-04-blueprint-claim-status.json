@@ -1,0 +1,41 @@
+{
+  "id": "BH-04-blueprint-claim-status",
+  "skill": "service-blueprinting",
+  "prompt": "Customers keep calling us to chase their home-insurance claims. Help us understand why this happens and what's going on behind it.",
+  "input_material": "Harbour Mutual (home insurer), claims.\n\nContact centre data (2025, n=9,300 claims): 38% of claimants call at least twice in the first 10 days, mostly to ask for status.\n\nOps review, \"5 whys\" on status calls (signed off by the claims director):\nWhy do customers call? -> They see no update. Why? -> The claim status is not updated. Why? -> Adjusters don't update it. Why? -> They forget. Root cause: human error. Action: retrain adjusters on status updates.\n\nOther facts collected:\n- The app shows a status that changes only when a payment decision is made (claims policy CP-7). Until then it reads \"In review\".\n- Adjusters write progress notes in the adjuster tool; contact-centre agents work in the CRM and cannot see adjuster notes.\n- Claims are triaged by a model into bands A/B/C. Claims where the model's confidence is below 0.6 are routed to band C (senior adjuster queue, average wait 6 days). Customers are not told their band or expected wait.",
+  "notes": "Traps: root cause stopped at 'human error'; single linear 5-whys chain where several causes combine; low-confidence AI default to the slowest queue with no communication.",
+  "assertions": [
+    {
+      "id": "frontstage-backstage-layers",
+      "type": "regex",
+      "category": "convention",
+      "description": "Blueprint distinguishes frontstage and backstage layers.",
+      "all_of": [
+        "front[- ]?stage",
+        "back[- ]?stage"
+      ],
+      "flags": "i"
+    },
+    {
+      "id": "beyond-human-error",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response go beyond 'adjusters forget' and show that the conditions around the adjuster (policy CP-7, the tool split, or the lack of any trigger to update) make the status invisible regardless of adjuster diligence?",
+      "pass_criteria": "PASS only if 'human error' is explicitly treated as a symptom or insufficient root cause AND at least one systemic condition is named in its place. FAIL if retraining adjusters is accepted as the main fix or 'human error' as the root cause."
+    },
+    {
+      "id": "combined-causes",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response show that status calls come from several causes acting together (e.g. status policy CP-7 plus agents unable to see adjuster notes plus band C queue time), rather than a single linear chain?",
+      "pass_criteria": "PASS only if at least two distinct causes are identified AND their interaction is explained (e.g. even a diligent adjuster's notes do not reach the app or the agent). FAIL if the analysis remains a single causal chain."
+    },
+    {
+      "id": "ai-low-confidence-default",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response flag that low-confidence triage defaults claims to the slowest queue without telling the customer, as a failure mode that drives status calls?",
+      "pass_criteria": "PASS only if the confidence < 0.6 routing to band C AND the absence of customer communication are both identified as a problem. Mentioning 'AI triage' generically does not pass."
+    }
+  ]
+}

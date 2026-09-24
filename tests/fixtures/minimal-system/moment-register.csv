@@ -1,0 +1,2 @@
+moment_id,node_id,moment_type,outcome_at_stake,why_disproportionate,evidence_ids,evidence_status,metric_ids,failure_consequence,owner
+MTM-0001,NOD-CUST-SAAS-ONBOARD-001-02,transition,Team adoption,Solo accounts churn,EVD-2026-0002,observed,MET-0001;MET-0002,Account never activates,Head of Onboarding

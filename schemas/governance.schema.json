@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/governance.schema.json",
+  "title": "Governance register row",
+  "description": "Governance of one managed hierarchy entry: owners, review cadence, triggers and freshness rule. One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: journey_id (identity), owner (an unowned journey is not governed), review_interval_days, last_reviewed_at and next_review_due (the cadence is the point of the record; next_review_due is on or after last_reviewed_at). evidence_steward, metric_owners (roles, ';'-separated), review_triggers (';'-separated values of the review_trigger enumeration) and freshness_rule may be pending.",
+  "type": "object",
+  "properties": {
+    "journey_id": {
+      "type": "string",
+      "pattern": "^(?:DOM(-[A-Z][A-Z0-9]*)+-[0-9]{3}|LFC-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}|JRN-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3})$"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "evidence_steward": {
+      "type": "string"
+    },
+    "metric_owners": {
+      "type": "string",
+      "description": "Roles that own the journey's metrics, ';'-separated; the per-metric owner stays in the metric register."
+    },
+    "review_interval_days": {
+      "type": "string",
+      "description": "Positive integer.",
+      "pattern": "^[1-9][0-9]*$"
+    },
+    "last_reviewed_at": {
+      "type": "string",
+      "description": "ISO 8601 date (YYYY-MM-DD).",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+    },
+    "next_review_due": {
+      "type": "string",
+      "description": "ISO 8601 date, on or after last_reviewed_at.",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+    },
+    "review_triggers": {
+      "type": "string",
+      "description": "review_trigger values, ';'-separated.",
+      "pattern": "^(?:major-service-change|policy-change|channel-launch|metric-shift|incident|organizational-change|new-research)(?:;(?:major-service-change|policy-change|channel-launch|metric-shift|incident|organizational-change|new-research))*$"
+    },
+    "freshness_rule": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "journey_id",
+    "owner",
+    "review_interval_days",
+    "last_reviewed_at",
+    "next_review_due"
+  ],
+  "additionalProperties": false
+}

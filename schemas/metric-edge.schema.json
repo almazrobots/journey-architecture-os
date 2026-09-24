@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/metric-edge.schema.json",
+  "title": "Metric edge register row",
+  "description": "A causal claim between two metrics, read as 'from_metric_id drives to_metric_id' or 'from_metric_id protects to_metric_id' (a guardrail). One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: from_metric_id, relation and to_metric_id (the edge itself; together they are the row's identity and must be unique) and evidence_status (the status of the causal claim; correlation alone supports inferred at most). evidence_ids and note may be empty for hypothesis and unknown edges.",
+  "type": "object",
+  "properties": {
+    "from_metric_id": {
+      "type": "string",
+      "description": "Metric that drives or protects.",
+      "pattern": "^MET-[0-9]{4}$"
+    },
+    "relation": {
+      "type": "string",
+      "enum": [
+        "drives",
+        "protects"
+      ]
+    },
+    "to_metric_id": {
+      "type": "string",
+      "description": "Metric that is driven or protected; never equal to from_metric_id.",
+      "pattern": "^MET-[0-9]{4}$"
+    },
+    "evidence_ids": {
+      "type": "string",
+      "description": "Evidence IDs (EVD), ';'-separated.",
+      "pattern": "^EVD-[0-9]{4}-[0-9]{4}(?:;EVD-[0-9]{4}-[0-9]{4})*$"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "inferred",
+        "hypothesis",
+        "unknown"
+      ]
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "from_metric_id",
+    "relation",
+    "to_metric_id",
+    "evidence_status"
+  ],
+  "additionalProperties": false
+}

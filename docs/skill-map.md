@@ -20,6 +20,24 @@
 | "Run a workshop" | `journey-workshop-facilitation` | task-specific skill |
 | "Review whether this map is actually good" | `journey-quality-audit` | whichever skill created the artifact |
 
+## Shared contract
+
+Every skill reads and writes the same registers, defined in `skills/journey-architecture/references/ontology.md` and shipped with each skill as `references/conventions.md`. Output from one skill is input to the next without translation:
+
+| Skill | Writes | Reads |
+|---|---|---|
+| `journey-architecture` | actors, journeys, relations, nodes | — |
+| `journey-research` | evidence | journeys, nodes |
+| `customer-journey-mapping`, `employee-journey-mapping` | nodes (stages) | evidence |
+| `service-blueprinting` | node-level blueprint views, root-cause candidates | nodes, evidence |
+| `moments-that-matter` | moments | nodes, evidence, metrics |
+| `journey-metrics` | metrics, metric edges | nodes, evidence |
+| `experience-opportunity-prioritization` | opportunities | evidence, moments, metrics |
+| `target-experience-design` | initiatives, target and transitional journeys | opportunities, metrics |
+| `journey-governance` | governance, change log | journeys, metrics |
+| `journey-portfolio-management` | portfolio | all of the above |
+| `journey-quality-audit` | audit findings | any artifact |
+
 ## Orchestration rule
 
 Prefer the smallest set of skills that covers the decision.

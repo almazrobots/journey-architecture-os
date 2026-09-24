@@ -18,6 +18,8 @@ A journey map is one representation of a larger model. The actual unit of work i
 - initiatives;
 - ownership and governance.
 
+Each of these lives in a CSV register (actors, journeys, relations, nodes, evidence, moments, metrics, metric edges, opportunities, initiatives, portfolio, governance, change log) keyed by stable IDs. Maps, blueprints, and reports are views over the registers. The columns, ID grammar, and rules are defined once, in [`skills/journey-architecture/references/ontology.md`](../skills/journey-architecture/references/ontology.md); see also [data-model.md](data-model.md).
+
 ## 2. The canonical loop
 
 ### Phase A — Frame
@@ -36,7 +38,7 @@ Use a service blueprint to show what makes the experience happen: frontstage, ba
 Find moments that matter, failure points, root causes, unmet outcomes, and evidence gaps.
 
 ### Phase F — Measure
-Attach leading, lagging, experience, behavioral, operational, employee, business, and guardrail metrics to the right level of the journey.
+Build one metric tree per journey, rooted in a single actor-outcome metric. Attach experience, behavioral, operational, employee-service, business, and guardrail metrics to the right node, and record each causal link as an edge with its own evidence status. A metric is "leading" only once its predictive link has been checked.
 
 ### Phase G — Prioritize opportunities
 Turn findings into opportunity statements before jumping to solutions. Prioritize with explicit evidence and trade-offs.
@@ -48,7 +50,7 @@ Define experience principles, desired outcomes, target-state scenarios, service 
 Connect opportunities to initiatives, experiments, owners, dependencies, milestones, and expected outcome movement.
 
 ### Phase J — Govern
-Version the journey, set evidence freshness rules, assign owners, define review cadence, and manage it inside a journey portfolio.
+Version the journey, set evidence freshness rules, assign owners, define review cadence, record every material change with its reason, evidence, and approver in a change log, and manage the journey inside a portfolio.
 
 ## 3. Evidence state
 
@@ -61,6 +63,8 @@ Every material claim should have one of four states:
 | `hypothesis` | Plausible but unvalidated statement |
 | `unknown` | Material question with insufficient evidence |
 
+Citation rules make the status checkable: an `observed` claim cites at least one evidence item that is itself `observed`; an `inferred` claim cites at least one `observed` or `inferred` item and states the reasoning. Stakeholder input supports `hypothesis` at most. The status belongs to the claim, not the source: the same analytics export can show an `observed` drop-off and support only an `inferred` reason for it. Open questions are registered as `unknown` evidence rows so they can be cited and closed.
+
 Do not encode confidence through visual polish. Encode it explicitly.
 
 ## 4. Journey hierarchy
@@ -72,10 +76,12 @@ Use hierarchy to avoid maps that are either impossibly broad or microscopically 
 | L0 | Experience domain / portfolio | Customer relationship |
 | L1 | Lifecycle | Become and remain a customer |
 | L2 | Journey | Start using the service |
-| L3 | Episode | Verify identity |
-| L4 | Interaction | Upload identity document |
+| L3 | Stage | Get the account ready to use |
+| L4 | Episode, step, or interaction inside a stage | Verify identity; upload identity document |
 
-A journey can contain nonlinear branches, loops, skips, and channel switches.
+L0–L2 entries live in the journey registry; stages (L3) and everything inside them (L4) are nodes in the node register, with IDs that embed their journey (`NOD-CUST-SAAS-ONBOARD-001-03` is stage 3, `…-03-02` an episode within it). Current, target, and transitional versions of a journey are separate L2 journeys linked by `baseline_journey_id`.
+
+A journey can contain nonlinear branches, loops, skips, and channel switches. Channel switches and loops stay inside a stage; they do not create new stages.
 
 ## 5. Three linked architectures
 

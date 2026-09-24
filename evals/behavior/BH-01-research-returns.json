@@ -1,0 +1,58 @@
+{
+  "id": "BH-01-research-returns",
+  "skill": "journey-research",
+  "prompt": "Here's what we have on the parcel returns journey. Turn it into something we can plan from.",
+  "input_material": "Lockbay (parcel lockers), returns. Material collected by the CX team, Feb-Mar 2026.\n\n1. Customer interviews, n=8. Recruited from the post-refund thank-you email (sent when a refund is paid). 6 of 8 said returning was easy; 2 mentioned rescanning the QR code.\n2. \"Returns Insights\" slide deck from our research agency (no sample, method, or fieldwork dates given): \"Customers' main frustration is the wait for their refund.\"\n3. Support: \"Where is my refund?\" is the top ticket category in February, 2,140 tickets.\n4. Product analytics, all return sessions in February (n=18,420): 9% end without a parcel being deposited; 31% include two or more QR scan attempts.\n5. Median time from deposit to refund: 6 days (payments data, Feb 2026).",
+  "notes": "Traps: survivorship bias in interview recruitment; qualitative count invites a percentage; agency deck without sample treated as observed; ticket volume read as prevalence.",
+  "assertions": [
+    {
+      "id": "ids-follow-ontology-grammar",
+      "type": "regex",
+      "category": "convention",
+      "description": "At least one ontology ID appears, and every ID-like token matches the ontology ID grammar (both read from ontology.md at run time).",
+      "pattern": "@ontology-id-finder",
+      "every_match": "@ontology-id-grammar"
+    },
+    {
+      "id": "four-evidence-statuses",
+      "type": "regex",
+      "category": "convention",
+      "flags": "i",
+      "description": "All four evidence_status values from the ontology appear.",
+      "all_of": [
+        "\\bobserved\\b",
+        "\\binferred\\b",
+        "\\bhypothes[ie]s\\b",
+        "\\bunknown\\b"
+      ]
+    },
+    {
+      "id": "survivorship-bias",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response recognise that the interviewees were recruited only after their refund was paid, so the interviews cannot represent customers who abandoned or are still waiting (e.g. the 9% of sessions that end without a deposit)?",
+      "pass_criteria": "PASS only if the response explicitly links the recruitment channel (post-refund email) to a bias that excludes abandoners or unfinished returns. A generic remark such as 'small sample' or 'more research needed' does NOT pass. FAIL if the interviews support a claim like 'returning is easy for customers' without this caveat."
+    },
+    {
+      "id": "no-qual-percentage",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response avoid turning '6 of 8 said it was easy' into a percentage or a population-level claim?",
+      "pass_criteria": "PASS if the interview result is reported as a count within its sample (or not generalised). FAIL if the response states '75%' or 'most customers find returning easy' or equivalent as a finding about customers in general."
+    },
+    {
+      "id": "agency-deck-status",
+      "type": "judge",
+      "category": "method",
+      "question": "Is the agency deck's claim ('main frustration is the refund wait') given a status below observed because the deck states no sample, method, or dates?",
+      "pass_criteria": "PASS only if the claim is labelled hypothesis/unknown/unverified (or equivalent) AND the missing sample/method/dates are given as the reason. FAIL if it is treated as an observed finding or used as primary support for a conclusion."
+    },
+    {
+      "id": "tickets-not-prevalence",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response avoid reading the 2,140 refund tickets as the number or share of customers affected?",
+      "pass_criteria": "PASS only if the response notes that tickets count contacts rather than distinct customers (repeat contacts, unknown number of returners in the period), or explicitly declines to derive prevalence from them. FAIL if the ticket count is used as evidence of how many or what share of customers are affected, or as proof that refund waiting is 'the main problem'."
+    }
+  ]
+}

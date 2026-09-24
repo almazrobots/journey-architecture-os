@@ -1,0 +1,4 @@
+node_id,journey_id,parent_node_id,node_type,sequence,name,actor_goal,evidence_ids,evidence_status
+NOD-CUST-SAAS-ONBOARD-001-01,JRN-CUST-SAAS-ONBOARD-001,,stage,1,Set up the account,Get a working account,EVD-2026-0001,observed
+NOD-CUST-SAAS-ONBOARD-001-02,JRN-CUST-SAAS-ONBOARD-001,,stage,2,Invite the team,Get colleagues in,EVD-2026-0002;EVD-2026-0003,observed
+NOD-CUST-SAAS-ONBOARD-001-02-01,JRN-CUST-SAAS-ONBOARD-001,NOD-CUST-SAAS-ONBOARD-001-02,episode,1,Import users,Avoid manual entry,EVD-2026-0003,hypothesis

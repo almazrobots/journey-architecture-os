@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/opportunity.schema.json",
+  "title": "Opportunity register row",
+  "description": "A solution-independent area for improvement in one primary journey (ontology: Opportunity, prefix OPP). evidence_status qualifies problem; root_cause_status qualifies root_cause. One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: opportunity_id and journey_id (identity and primary journey), problem (the substance), evidence_status and root_cause_status (whether problem and cause rest on evidence; unknown when not assessed) and status. node_id is empty when the opportunity spans the journey; moments, metrics, actor outcome, root cause, value, feasibility, risk, decision and owner come from analysis and prioritization.",
+  "type": "object",
+  "properties": {
+    "opportunity_id": {
+      "type": "string",
+      "pattern": "^OPP-[0-9]{4}$"
+    },
+    "journey_id": {
+      "type": "string",
+      "pattern": "^JRN-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}$"
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^NOD-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}(-[0-9]{2})+$"
+    },
+    "moment_ids": {
+      "type": "string",
+      "description": "Moment IDs (MTM), ';'-separated.",
+      "pattern": "^MTM-[0-9]{4}(?:;MTM-[0-9]{4})*$"
+    },
+    "metric_ids": {
+      "type": "string",
+      "description": "Metric IDs (MET), ';'-separated.",
+      "pattern": "^MET-[0-9]{4}(?:;MET-[0-9]{4})*$"
+    },
+    "actor_outcome": {
+      "type": "string"
+    },
+    "problem": {
+      "type": "string"
+    },
+    "root_cause": {
+      "type": "string"
+    },
+    "root_cause_status": {
+      "type": "string",
+      "description": "evidence_status of root_cause.",
+      "enum": [
+        "observed",
+        "inferred",
+        "hypothesis",
+        "unknown"
+      ]
+    },
+    "evidence_ids": {
+      "type": "string",
+      "description": "Evidence IDs (EVD), ';'-separated.",
+      "pattern": "^EVD-[0-9]{4}-[0-9]{4}(?:;EVD-[0-9]{4}-[0-9]{4})*$"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "inferred",
+        "hypothesis",
+        "unknown"
+      ]
+    },
+    "expected_value": {
+      "type": "string"
+    },
+    "feasibility": {
+      "type": "string"
+    },
+    "dependencies": {
+      "type": "string"
+    },
+    "risk": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "act-now",
+        "investigate",
+        "sequence",
+        "monitor",
+        "deprioritize"
+      ]
+    },
+    "owner": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "accepted",
+        "in-progress",
+        "done",
+        "rejected"
+      ]
+    }
+  },
+  "required": [
+    "opportunity_id",
+    "journey_id",
+    "problem",
+    "root_cause_status",
+    "evidence_status",
+    "status"
+  ],
+  "additionalProperties": false
+}

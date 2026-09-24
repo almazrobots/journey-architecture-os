@@ -4,7 +4,7 @@ description: Defines and maintains a hierarchy of experience domains, lifecycles
 license: MIT
 metadata:
   author: journey-architecture-os
-  version: "1.0.0"
+  version: "2.0.0"
   domain: experience-architecture
 ---
 
@@ -76,13 +76,13 @@ Examples:
 ### 4. Decompose hierarchy
 Use a flexible five-level model:
 
-- L0 experience domain / portfolio;
-- L1 lifecycle;
-- L2 journey;
-- L3 episode;
-- L4 interaction/touchpoint.
+- L0 experience domain / portfolio (`DOM`);
+- L1 lifecycle (`LFC`);
+- L2 journey (`JRN`);
+- L3 stage (`NOD`, node without a parent);
+- L4 episode, step, or interaction inside a stage (`NOD` with a parent; `-{NN}` segments may nest deeper, the level stays L4).
 
-Not every program needs all five levels.
+L0–L2 live in the journey registry, L3–L4 in the node register. Not every program needs all five levels.
 
 ### 5. Set boundaries
 For every L2 journey define:
@@ -95,16 +95,17 @@ For every L2 journey define:
 - out-of-scope boundaries.
 
 ### 6. Map relationships
-Capture:
+Hierarchy is already recorded in `parent_id` and `parent_node_id`, and journey versions in `baseline_journey_id`. Record every other relationship between journeys, lifecycles, domains, or nodes as a row of the relation register (`from_id, relation, to_id, evidence_ids, evidence_status, note`), read as "from `relation` to", using exactly these relations:
 
-- `parent_of`;
-- `precedes`;
-- `can_follow`;
-- `branches_to`;
-- `depends_on`;
+- `precedes` — normally happens before;
+- `can_follow` — may happen after;
+- `branches_to` — an alternative path leads to;
+- `depends_on` — cannot complete without;
 - `shares_touchpoint_with`;
 - `shares_capability_with`;
-- `employee_enables_customer_journey`.
+- `enables` — an employee or partner journey makes the other possible.
+
+No self-relations, and each `from_id, relation, to_id` triple appears once.
 
 ### 7. Assign stable IDs
 IDs must survive renaming and reorganization.
@@ -135,10 +136,14 @@ Return:
 
 ## Output contract
 
-At minimum:
+The hierarchy table uses the journey registry columns:
 
-| journey_id | level | parent_id | actor | journey | trigger | desired_outcome | state | owner |
-|---|---|---|---|---|---|---|---|---|
+| journey_id | level | parent_id | actor_id | name | trigger | start_boundary | end_boundary | desired_outcome | state | baseline_journey_id | status | owner | version | last_reviewed_at |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+
+A `target` or `transitional` L2 journey names the `current` journey it changes in `baseline_journey_id`; leave it empty otherwise. The relationship map is the relation register, rows `from_id, relation, to_id, evidence_ids, evidence_status, note`. The actor inventory uses `actor_id, name, actor_type, segment, context`. When stages are defined, list them with the node register columns `node_id, journey_id, parent_node_id, node_type, sequence, name, actor_goal, evidence_ids, evidence_status`.
+
+Follow `references/conventions.md` for IDs, evidence statuses, and register columns. A boundary or hierarchy agreed in a workshop is `hypothesis` until research confirms the actor experiences it that way.
 
 Also include a Mermaid graph when relationships are complex.
 
@@ -164,6 +169,10 @@ After architecture:
 
 ## References
 
+Read `references/conventions.md` for IDs, evidence statuses, and register columns.
 Read `references/ontology.md` for entity definitions and naming.
 Read `references/decomposition.md` for splitting and combining rules.
-Use `assets/journey-registry.csv` for the hierarchy table.
+Use `assets/journey-registry.csv` for the hierarchy table (L0–L2 rows).
+Use `assets/actor-register.csv` for the actor inventory.
+Use `assets/relation-register.csv` for the relationship map (step 6).
+Use `assets/node-register.csv` for stages, episodes, steps, and interactions (L3/L4).

@@ -1,13 +1,13 @@
 {
   "name": "journey-architecture-os",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "license": "MIT",
   "format": "Agent Skills",
   "skills": [
     {
       "name": "customer-journey-mapping",
       "path": "skills/customer-journey-mapping",
-      "description": "Creates evidence-backed customer journey maps that model a customer's goals, stages, actions, expectations, touchpoints, channels, friction, workarounds, emotions when evidenced, outcomes, and variations. Use for current-state, day-in-the-life, future-state, or scenario-based CJM work and when translating research into an end-to-end customer experience model."
+      "description": "Creates evidence-backed customer journey maps that model a customer's goals, stages, actions, expectations, touchpoints, channels, friction, workarounds, emotions when evidenced, outcomes, and variations. Use for current-state, transitional, day-in-the-life, or scenario-based CJM work and when translating research into an end-to-end customer experience model; for designing a future-state experience, prefer target-experience-design."
     },
     {
       "name": "employee-journey-mapping",
@@ -72,7 +72,7 @@
     {
       "name": "service-blueprinting",
       "path": "skills/service-blueprinting",
-      "description": "Builds service blueprints that connect customer or employee actions to frontstage interactions, backstage work, supporting processes, people, policies, data, systems, partners, automation, and AI. Use when a journey problem requires root-cause analysis, handoff analysis, operational redesign, service delivery architecture, or visibility into how an experience is produced."
+      "description": "Builds service blueprints that connect customer or employee actions to frontstage interactions, backstage work, supporting processes, people, policies, data, systems, partners, automation, and AI. Use when a journey problem requires root-cause analysis, handoff analysis, operational redesign, service delivery architecture, or visibility into how an experience is produced. Prefer it over a generic process map or swimlane whenever the question is why customers or employees wait, get stuck, repeat themselves, or receive inconsistent service, even when the request says 'process map'."
     },
     {
       "name": "target-experience-design",

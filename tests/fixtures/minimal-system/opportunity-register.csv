@@ -1,0 +1,2 @@
+opportunity_id,journey_id,node_id,moment_ids,metric_ids,actor_outcome,problem,root_cause,root_cause_status,evidence_ids,evidence_status,expected_value,feasibility,dependencies,risk,decision,owner,status
+OPP-0001,JRN-CUST-SAAS-ONBOARD-001,NOD-CUST-SAAS-ONBOARD-001-02,MTM-0001,MET-0001;MET-0002,Team working together in week 1,Half of accounts invite fewer than 3 users in week 1,Inviting colleagues is manual and easy to postpone,hypothesis,EVD-2026-0002;EVD-2026-0003,observed,high,medium,,low,act-now,Head of Onboarding,accepted

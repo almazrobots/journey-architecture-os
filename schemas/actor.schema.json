@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/actor.schema.json",
+  "title": "Actor register row",
+  "description": "A person or role whose experience is modeled (ontology: Actor, prefix ACT). One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: actor_id (identity), name and actor_type (without a name and a type the actor cannot be told apart or classified). segment and context refine a known actor and may be unknown.",
+  "type": "object",
+  "properties": {
+    "actor_id": {
+      "type": "string",
+      "pattern": "^ACT-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{2}$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "actor_type": {
+      "type": "string",
+      "enum": [
+        "customer",
+        "employee",
+        "manager",
+        "candidate",
+        "partner",
+        "citizen",
+        "other"
+      ]
+    },
+    "segment": {
+      "type": "string"
+    },
+    "context": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "actor_id",
+    "name",
+    "actor_type"
+  ],
+  "additionalProperties": false
+}

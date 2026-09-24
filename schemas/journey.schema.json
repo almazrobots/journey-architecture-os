@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/journey.schema.json",
+  "title": "Journey registry row",
+  "description": "An entry of the journey hierarchy: experience domain (L0, DOM), lifecycle (L1, LFC) or journey (L2, JRN). L3/L4 are nodes and live in the node register. One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: journey_id, level and name (identity and place in the hierarchy), state and status (without them current, target and transitional versions and the lifecycle cannot be told apart). parent_id is empty for DOM rows and for journeys not yet placed in the hierarchy, and actor_id may be empty only for DOM rows (the validator enforces it for LFC and JRN), so both are optional here; baseline_journey_id is required only for L2 target or transitional journeys, a conditional rule the validator enforces; boundaries, outcome, owner, version and review date are the content a draft is still gathering.",
+  "type": "object",
+  "properties": {
+    "journey_id": {
+      "type": "string",
+      "pattern": "^(?:DOM(-[A-Z][A-Z0-9]*)+-[0-9]{3}|LFC-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}|JRN-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3})$"
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "L0",
+        "L1",
+        "L2"
+      ]
+    },
+    "parent_id": {
+      "type": "string",
+      "description": "Hierarchy entry one or more levels up (DOM or LFC).",
+      "pattern": "^(?:DOM(-[A-Z][A-Z0-9]*)+-[0-9]{3}|LFC-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3})$"
+    },
+    "actor_id": {
+      "type": "string",
+      "pattern": "^ACT-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{2}$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "trigger": {
+      "type": "string"
+    },
+    "start_boundary": {
+      "type": "string"
+    },
+    "end_boundary": {
+      "type": "string"
+    },
+    "desired_outcome": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "current",
+        "target",
+        "transitional"
+      ]
+    },
+    "baseline_journey_id": {
+      "type": "string",
+      "description": "Current L2 journey that this target or transitional journey changes; empty for current journeys and for L0/L1 entries.",
+      "pattern": "^JRN-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "validated",
+        "active",
+        "stale",
+        "archived"
+      ]
+    },
+    "owner": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "last_reviewed_at": {
+      "type": "string",
+      "description": "ISO 8601 date (YYYY-MM-DD).",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+    }
+  },
+  "required": [
+    "journey_id",
+    "level",
+    "name",
+    "state",
+    "status"
+  ],
+  "additionalProperties": false
+}

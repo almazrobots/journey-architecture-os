@@ -1,0 +1,2 @@
+initiative_id,opportunity_ids,hypothesis,change,expected_metric_ids,expected_effect,dependencies,owner,status
+INI-0001,OPP-0001,Prompting invites during setup raises activation,Invite step inside account setup,MET-0001;MET-0002,+10 points activation,,Onboarding Product Manager,in-progress

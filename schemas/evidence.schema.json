@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/evidence.schema.json",
+  "title": "Evidence register row",
+  "description": "A registered finding from a named source, or a registered evidence gap (evidence_status unknown, finding states the open question) (ontology: Evidence, prefix EVD). One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: evidence_id, source_type, source_reference and collected_at (provenance: what, where from and when, which freshness review depends on), finding (the content or the open question) and evidence_status. journey_id and node_id scope the finding when it is specific; population, sample and limitations may be unknown for secondary sources.",
+  "type": "object",
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^EVD-[0-9]{4}-[0-9]{4}$"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "interview",
+        "observation",
+        "diary",
+        "usability-test",
+        "survey",
+        "analytics",
+        "experiment",
+        "support-log",
+        "operational-record",
+        "document",
+        "stakeholder-input",
+        "other"
+      ]
+    },
+    "source_reference": {
+      "type": "string"
+    },
+    "collected_at": {
+      "type": "string",
+      "description": "ISO 8601 date (YYYY-MM-DD).",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+    },
+    "population_or_sample": {
+      "type": "string"
+    },
+    "journey_id": {
+      "type": "string",
+      "pattern": "^JRN-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}$"
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^NOD-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}(-[0-9]{2})+$"
+    },
+    "finding": {
+      "type": "string"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "inferred",
+        "hypothesis",
+        "unknown"
+      ]
+    },
+    "limitations": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "source_type",
+    "source_reference",
+    "collected_at",
+    "finding",
+    "evidence_status"
+  ],
+  "additionalProperties": false
+}

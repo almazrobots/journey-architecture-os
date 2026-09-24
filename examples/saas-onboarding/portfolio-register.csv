@@ -1,0 +1,9 @@
+journey_id,parent_id,level,actor_id,name,state,status,owner,evidence_freshness,metric_coverage,linked_opportunities,linked_initiatives,last_reviewed_at
+DOM-CUSTOMER-RELATIONSHIP-001,,L0,,Customer relationship,current,active,Chief Customer Officer,needs-review,,,,2026-07-01
+LFC-CUST-SMB-RELATIONSHIP-001,DOM-CUSTOMER-RELATIONSHIP-001,L1,ACT-CUST-SMB-ADMIN-01,Become and remain a Ledgerly customer,current,active,Chief Customer Officer,needs-review,,OPP-0001;OPP-0002;OPP-0003;OPP-0004;OPP-0005;OPP-0006;OPP-0007;OPP-0008;OPP-0009,INI-0001;INI-0002;INI-0003;INI-0004,2026-07-01
+JRN-CUST-SAAS-EVALUATE-001,LFC-CUST-SMB-RELATIONSHIP-001,L2,ACT-CUST-SMB-ADMIN-01,Choose an invoicing service,current,stale,Head of Sales Operations,stale,,,,2025-11-20
+JRN-CUST-SAAS-ONBOARD-001,LFC-CUST-SMB-RELATIONSHIP-001,L2,ACT-CUST-SMB-ADMIN-01,Get the team invoicing in the service,current,validated,Director of Customer Onboarding,needs-review,0.8,OPP-0001;OPP-0002;OPP-0003;OPP-0004;OPP-0005;OPP-0006;OPP-0007;OPP-0008;OPP-0009,INI-0001;INI-0002;INI-0003;INI-0004,2026-09-24
+JRN-CUST-SAAS-ONBOARD-002,LFC-CUST-SMB-RELATIONSHIP-001,L2,ACT-CUST-SMB-ADMIN-01,Get the team invoicing in the service (target),target,draft,Director of Customer Onboarding,needs-review,0,,,2026-09-24
+JRN-CUST-SAAS-ONBOARD-003,LFC-CUST-SMB-RELATIONSHIP-001,L2,ACT-CUST-SMB-ADMIN-01,Get the team invoicing in the service (transitional Q1 2027),transitional,draft,Director of Customer Onboarding,needs-review,,,,2026-09-24
+JRN-CUST-SAAS-RENEW-001,LFC-CUST-SMB-RELATIONSHIP-001,L2,ACT-CUST-SMB-ADMIN-01,Decide whether to keep the service,current,draft,Head of Customer Success,unknown,,,,2026-03-10
+JRN-EMP-ONBOARD-CUSTOMER-001,,L2,ACT-EMP-ONBOARD-SPEC-01,Get a new customer account live,current,draft,Onboarding Operations Lead,needs-review,,,,2026-08-20

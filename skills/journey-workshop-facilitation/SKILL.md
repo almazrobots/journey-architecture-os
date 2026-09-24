@@ -4,7 +4,7 @@ description: Plans and facilitates customer/employee journey, service blueprint,
 license: MIT
 metadata:
   author: journey-architecture-os
-  version: "1.0.0"
+  version: "2.0.0"
   domain: experience-architecture
 ---
 
@@ -32,6 +32,8 @@ Define:
 - pre-read;
 - unresolved questions.
 
+Also fix the decision rule (decider, consent, consensus, or vote) and collect independent pre-session input; see Steps 1 and 5 of `references/facilitation-method.md`.
+
 ## Participant mix
 
 Include people who collectively understand:
@@ -49,17 +51,15 @@ Invite real customers/employees only when research design, consent, and facilita
 ## Workflow
 
 ### 1. Open with decision and evidence rules
-Mark every contribution:
-- evidence;
-- inference;
-- hypothesis;
-- unknown.
+Label every contribution `observed`, `inferred`, `hypothesis`, or `unknown`. `stakeholder-input` — everything participants know without a research or data source — supports `hypothesis` at most.
 
 ### 2. Align on scope
 Actor, trigger, start, end, state, exclusions.
 
 ### 3. Diverge silently first
 Reduce anchoring by having participants generate observations independently before discussion.
+
+Use the evidence tags, silent-generation techniques, dissent log, and power-dynamics rules in `references/facilitation-method.md` Steps 2–4 and 7; convert outputs into registers within two working days (Step 8).
 
 ### 4. Build the journey
 Prioritize actor goals/actions over internal process.
@@ -89,6 +89,10 @@ What will be:
 ### 9. Close with activation
 Assign owners and dates for unresolved evidence and decisions.
 
+## Conventions
+
+Follow `references/conventions.md` for IDs, evidence statuses, and register columns.
+
 ## Output contract
 
 - workshop objective;
@@ -111,4 +115,6 @@ Assign owners and dates for unresolved evidence and decisions.
 
 ## References
 
+Read `references/conventions.md` for IDs, evidence statuses, and register columns.
 Use `assets/workshop-agenda.md`.
+Read `references/facilitation-method.md` before planning a session, choosing a decision rule, or converting workshop output into registers.

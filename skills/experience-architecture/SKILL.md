@@ -4,7 +4,7 @@ description: Orchestrates the full Journey Architecture OS suite from problem fr
 license: MIT
 metadata:
   author: journey-architecture-os
-  version: "1.0.0"
+  version: "2.0.0"
   domain: experience-architecture
 ---
 
@@ -76,6 +76,10 @@ Use `journey-workshop-facilitation` plus the domain skill.
 ### Existing artifact/program needs critique
 Use `journey-quality-audit`.
 
+## Working without the other skills
+
+If this skill is installed alone, do not stop at routing. Produce the engagement brief (`assets/engagement-brief.md`), then run the chosen pattern yourself using the operating model in `references/operating-model.md`, the conventions in `references/conventions.md`, and the quality gates below. Name the skill that would normally own each step, so the user can install it for depth.
+
 ## Standard engagement patterns
 
 ### Pattern A — Fast diagnostic
@@ -84,7 +88,7 @@ Use `journey-quality-audit`.
 Use for a bounded problem where service mechanics are already understood.
 
 ### Pattern B — Root-cause redesign
-`journey-research → (customer-journey-mapping or employee-journey-mapping) → service-blueprinting → journey-metrics → experience-opportunity-prioritization → target-experience-design`
+`journey-research → (customer-journey-mapping or employee-journey-mapping) → moments-that-matter → service-blueprinting → journey-metrics → experience-opportunity-prioritization → target-experience-design`
 
 Use for cross-functional service problems.
 
@@ -100,18 +104,16 @@ Use when the current experience is missing or being substantially reinvented.
 
 ## Universal evidence rule
 
-For every material claim use one of:
+Every material claim carries an `evidence_status` (`observed`, `inferred`, `hypothesis`, `unknown`; definitions in `references/conventions.md`). Across all skills:
 
-- `observed`;
-- `inferred`;
-- `hypothesis`;
-- `unknown`.
-
-Never turn stakeholder agreement into customer/employee evidence.
+- `observed` cites at least one evidence item that is itself `observed`;
+- `inferred` cites at least one `observed` or `inferred` evidence item and states the reasoning;
+- stakeholder agreement is never customer or employee evidence: `stakeholder-input` supports `hypothesis` at most;
+- `unknown` is written down, never filled silently.
 
 ## Universal output package
 
-For broad projects, maintain a linked set of artifacts rather than one mega-map:
+For broad projects, maintain a linked set of artifacts rather than one mega-map. Registers (actors, journeys, relations, nodes, evidence, moments, metrics, metric edges, opportunities, initiatives, portfolio, governance, change log) hold the IDs; maps and blueprints are views that cite them.
 
 1. engagement brief;
 2. journey architecture;
@@ -123,8 +125,12 @@ For broad projects, maintain a linked set of artifacts rather than one mega-map:
 8. opportunity register;
 9. target-state journey;
 10. initiative/experiment links;
-11. governance record;
+11. governance register row and change log;
 12. journey portfolio entry.
+
+## Conventions
+
+Follow `references/conventions.md` for IDs, evidence statuses, and register columns.
 
 ## Quality gates
 
@@ -142,5 +148,6 @@ Before declaring the work complete:
 
 ## References
 
+Read `references/conventions.md` for IDs, evidence statuses, and register columns.
 Read `references/operating-model.md` for end-to-end sequencing.
 Use `assets/engagement-brief.md` to start a new project.

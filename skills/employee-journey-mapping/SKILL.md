@@ -4,7 +4,7 @@ description: Creates evidence-backed employee journey maps across employee lifec
 license: MIT
 metadata:
   author: journey-architecture-os
-  version: "1.0.0"
+  version: "2.0.0"
   domain: experience-architecture
 ---
 
@@ -27,21 +27,7 @@ Choose the structure that matches the decision.
 
 ## Experience lenses
 
-Use only when relevant:
-
-- role clarity;
-- manager interaction;
-- team/collaboration;
-- culture/norms;
-- technology/tools;
-- physical/remote work environment;
-- policy;
-- HR/people services;
-- IT/workplace services;
-- learning/career;
-- compensation/benefits;
-- well-being/safety;
-- organizational change.
+Choose the two to four lenses from `references/employee-lenses.md` that explain the friction behind the decision (role clarity, manager, team, culture, tools, environment, policy, organizational services, capability, pay, well-being, organizational change). Lenses are questions to ask of stages, not mandatory rows.
 
 ## Workflow
 
@@ -64,6 +50,16 @@ Better: "become able to perform the role confidently and independently."
 
 ### 3. Build stages from the employee's progression
 Do not default to recruitment → onboarding → performance → exit unless it fits the question.
+Derive stages from evidence, not from the org chart:
+
+1. Walk each employee's notes in time order and mark boundary signals: goal change, commitment point (costly to reverse), waiting or handoff the employee experiences as a distinct period, knowledge threshold, sub-outcome reached or lost.
+2. Not a boundary on its own: channel change, department or system change, a calendar interval the employee does not organize around. Record these as attributes of a stage.
+3. Keep a boundary when two employees, or one employee plus a non-interview source, show it.
+4. Keep a span between boundaries as a stage only if it passes all four tests: the employee would recognize it; it has its own goal; it ends on an exit condition visible from the employee's side; renaming it after the team or channel serving it would lose meaning.
+5. Loops and retries stay inside a stage. Aim for 3–7 stages in an L2 journey; fewer suggests an episode, more suggests steps.
+6. A stage (L3) is `observed` only when its goal and boundaries are supported by at least two clusters, or by one cluster that draws on at least two independent source types; a stage resting on one cluster from a single source type is at most `inferred`; a stage with no observed evidence is `hypothesis`. A stage is never stronger than its weakest defining finding. Episodes (L4) use a lighter rule: an episode is `observed` when at least one observed finding directly shows its actions, start, and end; otherwise it takes the status of its best supporting finding.
+
+If the `journey-research` skill is installed, its synthesis-to-stages method gives the full procedure with coding and a worked example.
 
 ### 4. Map employee actions and expectations
 Capture what employees actually do, including shadow processes and informal help.
@@ -71,8 +67,8 @@ Capture what employees actually do, including shadow processes and informal help
 ### 5. Map human relationships
 Manager/team interactions are often service touchpoints.
 
-### 6. Map environment
-Where relevant, record cultural, technological, and physical conditions.
+### 6. Apply the chosen lenses
+Record only the conditions from the chosen lenses that change what the employee does or achieves.
 
 ### 7. Map friction and workarounds
 Especially:
@@ -86,7 +82,8 @@ Especially:
 - hidden knowledge.
 
 ### 8. Add evidence and experience
-Never infer morale, engagement, or emotion from process delay alone.
+Collect and report employee evidence under `references/employee-research-ethics.md` (voluntariness, reporting thresholds, no manager access to raw data).
+Never infer morale, engagement, or emotion from process delay alone. HR, manager, and leadership accounts of the employee experience are `stakeholder-input` and support `hypothesis` at most.
 
 ### 9. Identify moments that matter
 Route candidates to `moments-that-matter`.
@@ -97,17 +94,20 @@ Use `service-blueprinting` for HR, IT, workplace, finance, manager, and platform
 ### 11. Attach outcomes/metrics
 Use `journey-metrics`.
 
+## Conventions
+
+Follow `references/conventions.md` for IDs, evidence statuses, and register columns.
+
 ## Output contract
 
 Include:
 
 - employee context;
 - journey scope;
-- stage table;
+- stage table with `node_id`, `evidence_status`, and `evidence_ids` on every row;
 - enabling environments;
 - manager/team moments;
 - friction/workarounds;
-- evidence state;
 - moments candidates;
 - service dependencies;
 - outcome metrics.
@@ -123,5 +123,7 @@ Include:
 
 ## References
 
+Read `references/conventions.md` for IDs, evidence statuses, and register columns.
 Read `references/employee-lenses.md`.
+Read `references/employee-research-ethics.md` before interviewing employees or using HR/IT system data.
 Use `assets/ejm-template.md`.

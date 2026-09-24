@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/initiative.schema.json",
+  "title": "Initiative register row",
+  "description": "A change or experiment that addresses one or more opportunities (ontology: Initiative, prefix INI). One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: initiative_id, opportunity_ids (an initiative addresses at least one opportunity; one without is solution-first), hypothesis and change (what is changed and why it should work) and status. Expected metrics, effect, dependencies and owner are refined during design.",
+  "type": "object",
+  "properties": {
+    "initiative_id": {
+      "type": "string",
+      "pattern": "^INI-[0-9]{4}$"
+    },
+    "opportunity_ids": {
+      "type": "string",
+      "description": "Opportunity IDs (OPP), ';'-separated.",
+      "pattern": "^OPP-[0-9]{4}(?:;OPP-[0-9]{4})*$"
+    },
+    "hypothesis": {
+      "type": "string"
+    },
+    "change": {
+      "type": "string"
+    },
+    "expected_metric_ids": {
+      "type": "string",
+      "description": "Metric IDs (MET), ';'-separated.",
+      "pattern": "^MET-[0-9]{4}(?:;MET-[0-9]{4})*$"
+    },
+    "expected_effect": {
+      "type": "string"
+    },
+    "dependencies": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "accepted",
+        "in-progress",
+        "done",
+        "rejected"
+      ]
+    }
+  },
+  "required": [
+    "initiative_id",
+    "opportunity_ids",
+    "hypothesis",
+    "change",
+    "status"
+  ],
+  "additionalProperties": false
+}

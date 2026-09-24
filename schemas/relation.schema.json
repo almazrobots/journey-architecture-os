@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/relation.schema.json",
+  "title": "Relation register row",
+  "description": "A lateral relationship between two hierarchy entries or nodes, read as 'from_id relation to_id'. Hierarchy itself lives in parent_id and parent_node_id, and journey versions in baseline_journey_id; neither is a relation. One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: from_id, relation and to_id (the relationship itself; together they are the row's identity and must be unique) and evidence_status (a relationship is a claim and carries provenance). evidence_ids cites the evidence for the relationship (observed or inferred relations must cite supporting evidence); note explains it; both may be empty.",
+  "type": "object",
+  "properties": {
+    "from_id": {
+      "type": "string",
+      "description": "Hierarchy entry or node the relation starts from.",
+      "pattern": "^(?:DOM(-[A-Z][A-Z0-9]*)+-[0-9]{3}|LFC-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}|JRN-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}|NOD-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}(-[0-9]{2})+)$"
+    },
+    "relation": {
+      "type": "string",
+      "enum": [
+        "precedes",
+        "can_follow",
+        "branches_to",
+        "depends_on",
+        "shares_touchpoint_with",
+        "shares_capability_with",
+        "enables"
+      ]
+    },
+    "to_id": {
+      "type": "string",
+      "description": "Hierarchy entry or node the relation points to; never equal to from_id.",
+      "pattern": "^(?:DOM(-[A-Z][A-Z0-9]*)+-[0-9]{3}|LFC-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}|JRN-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}|NOD-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}(-[0-9]{2})+)$"
+    },
+    "evidence_ids": {
+      "type": "string",
+      "description": "Evidence IDs (EVD), ';'-separated.",
+      "pattern": "^EVD-[0-9]{4}-[0-9]{4}(?:;EVD-[0-9]{4}-[0-9]{4})*$"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "inferred",
+        "hypothesis",
+        "unknown"
+      ]
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "from_id",
+    "relation",
+    "to_id",
+    "evidence_status"
+  ],
+  "additionalProperties": false
+}

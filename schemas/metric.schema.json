@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/metric.schema.json",
+  "title": "Metric register row",
+  "description": "A defined measurement attached to a node, a journey, or (for business outcomes spanning journeys) a lifecycle or domain (ontology: Metric, prefix MET). evidence_status qualifies the measure's validity; causal claims between metrics live in the metric-edge register. One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: metric_id and journey_or_node_id (identity and attachment), layer, name and definition (a metric without a definition is a label), direction (without it a change cannot be read as better or worse), evidence_status (the measure's validity; unknown when not assessed). Unit, source, population, cadence, owner, baseline, target and evidence_ids are instrumentation and validation that may still be pending; evidence_ids cites the evidence that the metric measures what it claims, and source names the evidence behind the baseline.",
+  "type": "object",
+  "properties": {
+    "metric_id": {
+      "type": "string",
+      "pattern": "^MET-[0-9]{4}$"
+    },
+    "journey_or_node_id": {
+      "type": "string",
+      "description": "Node, journey, or (for business outcomes) lifecycle or domain the metric is attached to.",
+      "pattern": "^(?:DOM(-[A-Z][A-Z0-9]*)+-[0-9]{3}|LFC-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}|JRN-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}|NOD-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}(-[0-9]{2})+)$"
+    },
+    "layer": {
+      "type": "string",
+      "enum": [
+        "actor-outcome",
+        "experience",
+        "behavior",
+        "operational",
+        "employee-service",
+        "business",
+        "guardrail"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "definition": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "population": {
+      "type": "string"
+    },
+    "cadence": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "increase",
+        "decrease",
+        "maintain"
+      ]
+    },
+    "baseline": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "evidence_ids": {
+      "type": "string",
+      "description": "Evidence IDs (EVD), ';'-separated.",
+      "pattern": "^EVD-[0-9]{4}-[0-9]{4}(?:;EVD-[0-9]{4}-[0-9]{4})*$"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "inferred",
+        "hypothesis",
+        "unknown"
+      ]
+    }
+  },
+  "required": [
+    "metric_id",
+    "journey_or_node_id",
+    "layer",
+    "name",
+    "definition",
+    "direction",
+    "evidence_status"
+  ],
+  "additionalProperties": false
+}

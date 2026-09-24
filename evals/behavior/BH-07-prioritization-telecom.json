@@ -1,0 +1,45 @@
+{
+  "id": "BH-07-prioritization-telecom",
+  "skill": "experience-opportunity-prioritization",
+  "prompt": "Here's our broadband fault-repair material. What should we work on next quarter?",
+  "input_material": "Parallax Fibre, \"fix my broken broadband\".\n\nFindings:\n- Contacts about \"no update on my fault\" are 42% of all fault contacts in 2025 (n=48,000 contacts).\n- 19% of engineer visits fail with the reason code \"customer not home\". Appointment windows are 8 hours. Customers receive an SMS the day before; nobody has checked whether the SMS arrives.\n- Router telemetry: 30% of faults clear after a remote router reset; agents offer the reset after a 20-minute diagnostic script.\n- Interviews (n=7, home workers): two described losing a day's pay waiting for an engineer.\n\nCandidate list from the product team (already agreed with the Head of Digital):\n1. Improve self-service.\n2. Enhance digital engagement during repairs.\n3. Streamline the repair process.",
+  "notes": "Traps: neutral-sounding solution directions presented as opportunities; share of contacts read as share of customers; cause of failed visits asserted without evidence.",
+  "assertions": [
+    {
+      "id": "opp-ids",
+      "type": "regex",
+      "category": "convention",
+      "description": "Opportunities use OPP-NNNN IDs.",
+      "pattern": "\\bOPP-[0-9]{4}\\b",
+      "min_count": 2
+    },
+    {
+      "id": "disguised-solutions",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response identify that 'improve self-service', 'enhance digital engagement' and 'streamline the repair process' are solution directions without an actor outcome or root cause, rather than carrying them forward as opportunities?",
+      "pass_criteria": "PASS only if these items are explicitly critiqued as solution-led or too vague to prioritise AND replaced by outcome- and cause-based opportunity statements. FAIL if any of them appears unchanged as a prioritised opportunity."
+    },
+    {
+      "id": "contacts-not-customers",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response recognise that 42% is a share of contacts, not of customers, so repeat contacts inflate it and the number of customers affected is unknown?",
+      "pass_criteria": "PASS only if the contacts-vs-customers distinction is made explicitly. FAIL if the response says 42% of customers are affected or otherwise treats the figure as customer prevalence."
+    },
+    {
+      "id": "no-show-cause-open",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response keep the cause of failed 'customer not home' visits open, treating the 8-hour window, SMS delivery, and other explanations as hypotheses to test?",
+      "pass_criteria": "PASS only if the cause is labelled unknown/hypothesis and at least two candidate explanations are named. FAIL if the 8-hour window (or any single cause) is asserted as the cause."
+    },
+    {
+      "id": "criteria-per-opportunity",
+      "type": "judge",
+      "category": "method",
+      "question": "Is each prioritised opportunity assessed on visible criteria (evidence strength, reach, consequence, feasibility, dependencies, or risk) rather than a bare ranking or single score?",
+      "pass_criteria": "PASS if each prioritised opportunity shows its reasoning on at least three named criteria. FAIL otherwise."
+    }
+  ]
+}

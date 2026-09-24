@@ -8,7 +8,8 @@
 | Evidence | What do we actually know? | Evidence register | journey-research |
 | Model | What does the actor experience? | CJM/EJM | customer-journey-mapping / employee-journey-mapping |
 | Explain | What produces that experience? | Service blueprint | service-blueprinting |
-| Diagnose | What matters and why? | Moments + root causes | moments-that-matter |
+| Diagnose: moments | Which moments carry disproportionate consequence? | Moment register | moments-that-matter |
+| Diagnose: causes | Why do failures happen, and what can be changed? | Evidenced causal trees and root causes on the blueprint | service-blueprinting |
 | Measure | How will we know? | Metric tree | journey-metrics |
 | Prioritize | Where should we intervene? | Opportunity register | experience-opportunity-prioritization |
 | Design | What should future experience be? | Target journey | target-experience-design |

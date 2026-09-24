@@ -1,2 +1,1 @@
-opportunity_id,journey_id,node_id,actor_outcome,problem_or_root_cause,evidence_ids,expected_value,feasibility,dependencies,risk,decision,owner,status
-OPP-001,,,,,,,,,,,,draft
+opportunity_id,journey_id,node_id,moment_ids,metric_ids,actor_outcome,problem,root_cause,root_cause_status,evidence_ids,evidence_status,expected_value,feasibility,dependencies,risk,decision,owner,status

@@ -1,0 +1,52 @@
+{
+  "id": "BH-08-audit-agency-cjm",
+  "skill": "journey-quality-audit",
+  "prompt": "Our agency delivered the journey map below. Leadership wants to use it to decide next year's investments. Thoughts?",
+  "input_material": "MedPost (online pharmacy) - Customer Journey v2.1, agency deliverable.\n\nResearch basis: 12 in-depth interviews with members of the MedPost Loyalty Club (5+ orders in the last year), Nov 2025.\n\nStages: Catalogue screen -> Cart screen -> Checkout screen -> Order tracking page -> Reorder screen.\n\nKey insights (evidence status as labelled by the agency):\n- \"First-time buyers are confused by prescription upload at checkout.\" (observed - interviews)\n- \"Customers value the pharmacist video consultation during checkout.\" (observed - interviews; the video consultation is a pilot running in one city)\n- \"Customers feel reassured by tracking updates.\" (observed - interviews)\n\nMetrics row: Checkout NPS, Tracking NPS, Reorder NPS.\n\nOpportunities: \"Improve the checkout experience\"; \"Increase reorder convenience\"; \"Strengthen trust at key moments\".\n\nOwner: agency account team. Version: v2.1. Date: Dec 2025.\nNote from procurement: the agency contract ended on 31 Jan 2026. No MedPost person or team is named as owner or reviewer, and no review date is set.",
+  "notes": "Traps: stages from screens; loyalty-club sample cannot support first-time-buyer claims; pilot shown as the general current state; NPS as stage metric; neutral-sounding solution directions as opportunities. Owner/version are listed, but the owning agency's contract has ended and no internal owner or review date exists.",
+  "assertions": [
+    {
+      "id": "scores-0-3",
+      "type": "regex",
+      "category": "convention",
+      "description": "Uses the 0-3 scoring scale on dimensions.",
+      "pattern": "(?:\\|\\s*[0-3]\\s*\\||\\b[0-3]\\s*/\\s*3\\b)",
+      "min_count": 3
+    },
+    {
+      "id": "sample-mismatch",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the audit flag that interviews with loyalty-club members (5+ orders) cannot support an 'observed' claim about first-time buyers?",
+      "pass_criteria": "PASS only if the mismatch between the sample and the first-time-buyer claim is explicitly identified. A generic 'more research needed' does not pass. FAIL otherwise."
+    },
+    {
+      "id": "screens-as-stages",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the audit flag that the stages are screens of the app/website rather than the customer's progress?",
+      "pass_criteria": "PASS only if the screen-based stage structure is identified as an actor-centricity or coherence problem. FAIL otherwise."
+    },
+    {
+      "id": "pilot-as-current",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the audit flag that the video consultation is a one-city pilot presented as part of the general current-state experience?",
+      "pass_criteria": "PASS only if the pilot is identified as misrepresenting the current state for most customers (current/target or scope problem). FAIL otherwise."
+    },
+    {
+      "id": "nps-and-vague-opportunities",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the audit flag both the per-stage NPS metrics and the vague, solution-direction opportunities ('improve the checkout experience' etc.)?",
+      "pass_criteria": "PASS only if both issues are identified: NPS is unsuitable as a stage metric, AND the opportunities lack a root cause/actor outcome or are solution directions. FAIL if either is missed."
+    },
+    {
+      "id": "external-owner",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the audit notice that, with the agency contract ended, the map has no current owner, reviewer, or review date inside MedPost, and treat this as a problem for using it in recurring investment decisions?",
+      "pass_criteria": "PASS if the lack of a current accountable owner/review after the contract ended is identified as a governance gap. FAIL if governance is judged adequate because an owner and version are listed, or if governance is not assessed."
+    }
+  ]
+}

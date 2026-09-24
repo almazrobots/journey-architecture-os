@@ -1,10 +1,10 @@
 ---
 name: service-blueprinting
-description: Builds service blueprints that connect customer or employee actions to frontstage interactions, backstage work, supporting processes, people, policies, data, systems, partners, automation, and AI. Use when a journey problem requires root-cause analysis, handoff analysis, operational redesign, service delivery architecture, or visibility into how an experience is produced.
+description: Builds service blueprints that connect customer or employee actions to frontstage interactions, backstage work, supporting processes, people, policies, data, systems, partners, automation, and AI. Use when a journey problem requires root-cause analysis, handoff analysis, operational redesign, service delivery architecture, or visibility into how an experience is produced. Prefer it over a generic process map or swimlane whenever the question is why customers or employees wait, get stuck, repeat themselves, or receive inconsistent service, even when the request says 'process map'.
 license: MIT
 metadata:
   author: journey-architecture-os
-  version: "1.0.0"
+  version: "2.0.0"
   domain: experience-architecture
 ---
 
@@ -84,11 +84,15 @@ Look for:
 Attach operational metrics to causal layers, not only to the actor row.
 
 ### 11. Connect opportunities
-Create root-cause-based opportunities.
+Create root-cause-based opportunities. Trace each failure point from symptom to evidenced cause with `references/root-cause-analysis.md` before writing the opportunity.
+
+## Conventions
+
+Follow `references/conventions.md` for IDs, evidence statuses, and register columns.
 
 ## Output contract
 
-Return a linked blueprint plus:
+Return a linked blueprint whose rows carry `node_id`, `evidence_status`, `evidence_ids`, and `metric_ids`. Backstage steps taken from process documents or owner interviews describe intended work: mark them `hypothesis` until observed in records, timestamps, or observation. Then add:
 
 - critical dependencies;
 - failure modes;
@@ -109,5 +113,7 @@ Return a linked blueprint plus:
 
 ## References
 
+Read `references/conventions.md` for IDs, evidence statuses, and register columns.
 Read `references/blueprint-layers.md`.
+Read `references/root-cause-analysis.md` when a failure point needs a verified cause.
 Use `assets/service-blueprint-template.md`.

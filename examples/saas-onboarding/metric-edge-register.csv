@@ -1,0 +1,17 @@
+from_metric_id,relation,to_metric_id,evidence_ids,evidence_status,note
+MET-0001,drives,MET-0009,EVD-2026-0016,inferred,"96% vs 81% retention by threshold met or not; confounded by account size, so correlation only"
+MET-0002,drives,MET-0001,EVD-2026-0021,inferred,"Predictive check on the 321 accounts that attempted a sync, 7-day cut pre-specified: 55% vs 31%, gap holds within seat bands; correlation, not causal"
+MET-0003,drives,MET-0002,EVD-2026-0002,inferred,"Median 23 vs 9 days to first synced invoice by first-sync outcome; a difference in medians between groups, not a measured effect"
+MET-0015,drives,MET-0003,EVD-2026-0005;EVD-2026-0017,inferred,Admins who wait on an accountant guess the mapping (interviews); no timing data exists yet
+MET-0004,drives,MET-0003,EVD-2026-0009,hypothesis,Session wait could delay correct mapping for 10+ seat accounts; not checked
+MET-0008,drives,MET-0004,EVD-2026-0011,hypothesis,Fewer minutes on mapping frees session capacity; capacity model not built
+MET-0006,drives,MET-0005,EVD-2026-0006,inferred,Reasoned from stated intent (8 of 14 admins); MET-0006 not yet measured so the link is unchecked in data
+MET-0005,drives,MET-0001,EVD-2026-0008;EVD-2026-0001,inferred,"Definitional component: the MET-0001 threshold needs 3 users, so invites are part of the outcome definition; not counted as causal evidence"
+MET-0014,drives,MET-0001,EVD-2026-0019,hypothesis,Week-1 blocks may push teammates back to the old way; sample all from accounts that met the threshold
+MET-0007,drives,MET-0001,EVD-2026-0015,hypothesis,Candidate only: the 2025 checklist moved early activity without a detectable outcome effect
+MET-0016,protects,MET-0003,,hypothesis,Fast signal for INI-0001: changing matching or accountant input must not raise corrections within 14 days
+MET-0016,protects,MET-0001,,hypothesis,Fast signal for INI-0003: sending before mapping is confirmed must not raise corrections within 14 days
+MET-0011,protects,MET-0003,,hypothesis,Confirmatory 60-day read for INI-0001
+MET-0011,protects,MET-0001,,hypothesis,Confirmatory 60-day read for INI-0003
+MET-0012,protects,MET-0005,,hypothesis,Bringing teammates in earlier must not produce sends that skip required approval
+MET-0010,protects,MET-0004,EVD-2026-0009,inferred,Shorter session waits bought with more specialist hours would raise cost-to-serve; hours and sessions come from the same records

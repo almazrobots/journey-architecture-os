@@ -1,0 +1,44 @@
+{
+  "id": "BH-05-mtm-mortgage",
+  "skill": "moments-that-matter",
+  "prompt": "Which parts of our mortgage journey should we focus on? Leadership wants a shortlist.",
+  "input_material": "Northfield Bank, mortgages, application to completion.\n\n- Complaints by touchpoint, 2025: document upload 1,900; app status page 420; valuation 310; rate-lock expiry 260; welcome pack 12.\n- Document upload: median delay 4 days; 96% of applicants who re-upload still complete.\n- Valuation: \"Withdrawal after the valuation call fell from 58% to 40%\" (2025: applicants whose valuation came in below the offer price, n=1,364; 2026 H1: all applicants who received a valuation call, n=6,100).\n- Rate-lock expiry: 3% of applications pass the 90-day lock before completion and face a higher rate; 41% of them complain, and 22% move their mortgage elsewhere within a year (vs 4% overall).\n- Customer panel: 8 existing customers selected by the marketing team rated the welcome pack \"the most memorable part of the process\".",
+  "notes": "Traps: complaint volume as importance; withdrawal ratio with a changed denominator; a hand-picked panel of completers as evidence.",
+  "assertions": [
+    {
+      "id": "mtm-ids",
+      "type": "regex",
+      "category": "convention",
+      "description": "Moments use MTM-NNNN IDs.",
+      "pattern": "\\bMTM-[0-9]{4}\\b"
+    },
+    {
+      "id": "moving-denominator",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response notice that the valuation withdrawal rates use different denominators (below-offer valuations in 2025 vs all valuation calls in 2026) and are not comparable?",
+      "pass_criteria": "PASS only if the denominator change is explicitly identified and the 'fell from 58% to 40%' improvement is rejected or heavily qualified. FAIL if the response treats the valuation moment as improved or less important on the basis of this figure."
+    },
+    {
+      "id": "volume-not-consequence",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response avoid ranking document upload by complaint volume alone, and take into account that 96% of applicants who re-upload still complete?",
+      "pass_criteria": "PASS if the document-upload decision, whether included or excluded, addresses the gap between complaint volume and consequence (e.g. the 96% completion). FAIL if it is shortlisted because it has the most complaints without that consideration."
+    },
+    {
+      "id": "panel-bias",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response discount the customer panel's view of the welcome pack because the panel was hand-picked by marketing and contains only customers who completed?",
+      "pass_criteria": "PASS only if the selection of the panel (marketing-chosen, existing customers) is named as a reason the finding is weak. FAIL if the welcome pack is shortlisted on the panel's view, or the panel is accepted without comment."
+    },
+    {
+      "id": "low-reach-high-consequence",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response weigh rate-lock expiry's low reach (3% of applications) against its consequence (higher rate, 41% complain, 22% switch away vs 4% overall) when deciding whether it belongs on the shortlist?",
+      "pass_criteria": "PASS if rate-lock expiry is discussed and the decision about it, whether included or excluded, explicitly weighs reach against consequence. FAIL if it is not discussed, or is dismissed only because 3% is a small share. The judge must not require a particular decision."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/moment.schema.json",
+  "title": "Moment register row",
+  "description": "A node with disproportionate consequence for the actor or the organization (ontology: Moment that matters, prefix MTM). One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: moment_id and node_id (identity and where the moment happens), moment_type and outcome_at_stake (what makes it a moment rather than a node label) and evidence_status. The justification, evidence, metrics, failure consequence and owner are filled as the moment is validated.",
+  "type": "object",
+  "properties": {
+    "moment_id": {
+      "type": "string",
+      "pattern": "^MTM-[0-9]{4}$"
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^NOD-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}(-[0-9]{2})+$"
+    },
+    "moment_type": {
+      "type": "string",
+      "enum": [
+        "decision",
+        "trust",
+        "transition",
+        "recovery",
+        "capability",
+        "relationship",
+        "high-risk"
+      ]
+    },
+    "outcome_at_stake": {
+      "type": "string"
+    },
+    "why_disproportionate": {
+      "type": "string"
+    },
+    "evidence_ids": {
+      "type": "string",
+      "description": "Evidence IDs (EVD), ';'-separated.",
+      "pattern": "^EVD-[0-9]{4}-[0-9]{4}(?:;EVD-[0-9]{4}-[0-9]{4})*$"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "inferred",
+        "hypothesis",
+        "unknown"
+      ]
+    },
+    "metric_ids": {
+      "type": "string",
+      "description": "Metric IDs (MET), ';'-separated.",
+      "pattern": "^MET-[0-9]{4}(?:;MET-[0-9]{4})*$"
+    },
+    "failure_consequence": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "moment_id",
+    "node_id",
+    "moment_type",
+    "outcome_at_stake",
+    "evidence_status"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/node.schema.json",
+  "title": "Node register row",
+  "description": "A stage (L3, no parent) or an episode, step or interaction inside a stage (L4). sequence equals the number in the node ID's last segment. One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: node_id and journey_id (identity and the journey the node belongs to), node_type, sequence and name (position and meaning), evidence_status (every claim carries provenance; use 'unknown' rather than leaving it blank). parent_node_id is empty for stage-level nodes; actor_goal and evidence_ids may not be known yet.",
+  "type": "object",
+  "properties": {
+    "node_id": {
+      "type": "string",
+      "pattern": "^NOD-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}(-[0-9]{2})+$"
+    },
+    "journey_id": {
+      "type": "string",
+      "pattern": "^JRN-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}$"
+    },
+    "parent_node_id": {
+      "type": "string",
+      "description": "Node ID minus its last -NN segment; empty for stage-level nodes.",
+      "pattern": "^NOD-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}(-[0-9]{2})+$"
+    },
+    "node_type": {
+      "type": "string",
+      "enum": [
+        "stage",
+        "episode",
+        "step",
+        "interaction"
+      ]
+    },
+    "sequence": {
+      "type": "string",
+      "description": "Position among siblings; equals the node ID's last segment.",
+      "pattern": "^[1-9][0-9]*$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "actor_goal": {
+      "type": "string"
+    },
+    "evidence_ids": {
+      "type": "string",
+      "description": "Evidence IDs (EVD), ';'-separated.",
+      "pattern": "^EVD-[0-9]{4}-[0-9]{4}(?:;EVD-[0-9]{4}-[0-9]{4})*$"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "inferred",
+        "hypothesis",
+        "unknown"
+      ]
+    }
+  },
+  "required": [
+    "node_id",
+    "journey_id",
+    "node_type",
+    "sequence",
+    "name",
+    "evidence_status"
+  ],
+  "additionalProperties": false
+}

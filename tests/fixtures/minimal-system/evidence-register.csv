@@ -1,0 +1,4 @@
+evidence_id,source_type,source_reference,collected_at,population_or_sample,journey_id,node_id,finding,evidence_status,limitations
+EVD-2026-0001,interview,Interview notes 2026-05,2026-05-14,8 administrators,JRN-CUST-SAAS-ONBOARD-001,NOD-CUST-SAAS-ONBOARD-001-01,Admins stall on single sign-on setup,observed,Small sample
+EVD-2026-0002,analytics,Product analytics dashboard,2026-06-01,All new accounts Q2,JRN-CUST-SAAS-ONBOARD-001,NOD-CUST-SAAS-ONBOARD-001-02,Half of accounts invite fewer than 3 users in week 1,observed,
+EVD-2026-0003,stakeholder-input,Onboarding team workshop,2026-06-10,,JRN-CUST-SAAS-ONBOARD-001,,Team believes CSV import is the blocker,hypothesis,Internal opinion

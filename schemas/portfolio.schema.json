@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/almazrobots/journey-architecture-os/main/schemas/portfolio.schema.json",
+  "title": "Portfolio register row",
+  "description": "A portfolio view of a hierarchy entry (L0 DOM, L1 LFC, L2 JRN). Inside a journey system it mirrors journey-registry for parent_id, level, actor_id, state and status, and links only opportunities and initiatives of its own journeys. metric_coverage is the share of stage-level nodes with at least one metric, a decimal from 0 to 1 with up to two decimals. One CSV row is one JSON object keyed by column header; an empty cell means 'not yet known' and is omitted from the object, so 'required' means the cell must be filled. List-valued cells hold IDs separated by ';' with no spaces. Required: journey_id, level and name (identity), state and status (lifecycle), evidence_freshness (the portfolio exists to show freshness; use 'unknown' when not assessed). parent_id and actor_id follow the journey registry; owner, coverage, links and review date may be pending.",
+  "type": "object",
+  "properties": {
+    "journey_id": {
+      "type": "string",
+      "pattern": "^(?:DOM(-[A-Z][A-Z0-9]*)+-[0-9]{3}|LFC-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3}|JRN-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3})$"
+    },
+    "parent_id": {
+      "type": "string",
+      "description": "Hierarchy entry one or more levels up (DOM or LFC).",
+      "pattern": "^(?:DOM(-[A-Z][A-Z0-9]*)+-[0-9]{3}|LFC-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{3})$"
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "L0",
+        "L1",
+        "L2"
+      ]
+    },
+    "actor_id": {
+      "type": "string",
+      "pattern": "^ACT-[A-Z]{2,6}(-[A-Z][A-Z0-9]*)+-[0-9]{2}$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "current",
+        "target",
+        "transitional"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "validated",
+        "active",
+        "stale",
+        "archived"
+      ]
+    },
+    "owner": {
+      "type": "string"
+    },
+    "evidence_freshness": {
+      "type": "string",
+      "enum": [
+        "current",
+        "needs-review",
+        "stale",
+        "unknown"
+      ]
+    },
+    "metric_coverage": {
+      "type": "string",
+      "description": "Share of stage-level nodes with at least one metric: 0 to 1, up to two decimals; empty when the journey has no stages.",
+      "pattern": "^(0(\\.[0-9]{1,2})?|1(\\.0{1,2})?)?$"
+    },
+    "linked_opportunities": {
+      "type": "string",
+      "description": "Opportunity IDs (OPP) of this entry's journeys, ';'-separated.",
+      "pattern": "^OPP-[0-9]{4}(?:;OPP-[0-9]{4})*$"
+    },
+    "linked_initiatives": {
+      "type": "string",
+      "description": "Initiative IDs (INI) addressing this entry's opportunities, ';'-separated.",
+      "pattern": "^INI-[0-9]{4}(?:;INI-[0-9]{4})*$"
+    },
+    "last_reviewed_at": {
+      "type": "string",
+      "description": "ISO 8601 date (YYYY-MM-DD).",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+    }
+  },
+  "required": [
+    "journey_id",
+    "level",
+    "name",
+    "state",
+    "status",
+    "evidence_freshness"
+  ],
+  "additionalProperties": false
+}

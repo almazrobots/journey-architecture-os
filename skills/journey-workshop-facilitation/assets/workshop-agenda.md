@@ -14,7 +14,7 @@
 Participants add actor goals/actions/evidence independently.
 
 ## 50–70 — Synthesis
-Group duplicates, preserve disagreements, mark hypotheses.
+Group duplicates, preserve disagreements. Label every contribution `observed` (cites a research or data source), `inferred`, `hypothesis`, or `unknown`; participant knowledge without a source is `hypothesis` at most.
 
 ## 70–90 — Friction and moments
 Identify failures, workarounds, and candidate moments that matter.

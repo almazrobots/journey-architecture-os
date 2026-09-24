@@ -1,0 +1,2 @@
+change_id,journey_id,changed_at,version,change,reason,evidence_ids,affected_node_ids,approved_by
+CHG-0001,JRN-CUST-SAAS-ONBOARD-001,2026-07-01,1.2,Split user import out of the invite stage,Import behaves differently from inviting,EVD-2026-0002,NOD-CUST-SAAS-ONBOARD-001-02;NOD-CUST-SAAS-ONBOARD-001-02-01,Head of Onboarding

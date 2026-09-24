@@ -1,0 +1,5 @@
+actor_id,name,actor_type,segment,context
+ACT-CUST-SMB-ADMIN-01,Customer account admin,customer,Small businesses (3-50 staff) on a paid plan with 3 or more seats,"Owner, office manager or finance lead who signed or inherited the contract; sets Ledgerly up alongside their normal job; usually the only person in the business who knows how the books are kept"
+ACT-CUST-SMB-TEAM-01,Customer team member,customer,"Staff at the same accounts who create, approve or send invoices","Joins after the admin invites them; invoiced before in spreadsheets, a word processor or a previous tool; has no say in set-up decisions"
+ACT-PART-ACCOUNTANT-01,External accountant or bookkeeper,partner,Accounts whose books are kept by an outside firm (share of cohort unknown; see EVD-2026-0018),Serves many small clients; is not a Ledgerly customer; is asked to confirm tax-rate and account mapping without access to the product
+ACT-EMP-ONBOARD-SPEC-01,Onboarding specialist,employee,Ledgerly onboarding team (6 specialists),Runs 45-minute set-up sessions for accounts that qualify under the onboarding tier policy; enables the customer journey but is not its primary actor

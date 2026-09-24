@@ -1,0 +1,46 @@
+{
+  "id": "BH-06-metrics-saas-onboarding",
+  "skill": "journey-metrics",
+  "prompt": "We need KPIs for new-customer onboarding for the board pack. Here's what we have.",
+  "input_material": "Ledgerly (B2B invoicing SaaS). Onboarding = sign-up until the customer is invoicing their own clients.\n\n- Head of Growth proposal: \"NPS per onboarding step - ask the NPS question after each of the 5 setup steps, and put the average in the board pack.\"\n- After launching the setup wizard (pre-fills tax settings from the company register) in May 2026: median time from sign-up to first invoice sent fell from 9 to 5 days. Share of first invoices voided within 24 hours rose from 27% to 35% over the same period.\n- \"Activation rate: 62%\" (definition from the analytics team: accounts that sent an invoice / accounts that completed setup).\n- 41% of sign-ups do not complete setup.\n- Some admins are business owners who use screen readers; the wizard has not been accessibility-tested.",
+  "notes": "Traps: NPS as a stage metric; speed metric improves while correctness worsens; activation ratio excludes abandoners from the denominator.",
+  "assertions": [
+    {
+      "id": "met-ids",
+      "type": "regex",
+      "category": "convention",
+      "description": "Metrics use MET-NNNN IDs.",
+      "pattern": "\\bMET-[0-9]{4}\\b",
+      "min_count": 3
+    },
+    {
+      "id": "guardrail-present",
+      "type": "regex",
+      "category": "convention",
+      "description": "At least one guardrail metric is defined.",
+      "pattern": "\\bguardrail",
+      "flags": "i"
+    },
+    {
+      "id": "nps-not-stage-metric",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response explain why NPS asked after each setup step is unsuitable as a stage-level onboarding metric, and propose stage-appropriate measures instead?",
+      "pass_criteria": "PASS only if a specific reason is given (e.g. NPS measures relationship/recommendation intent, not step success; repeated asking biases responses; averaging across steps is meaningless) AND alternative stage measures are proposed. FAIL if per-step NPS is adopted or dropped without explanation."
+    },
+    {
+      "id": "speed-vs-correctness",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response connect the faster time-to-first-invoice with the rise in voided invoices, and pair the speed metric with a correctness guardrail?",
+      "pass_criteria": "PASS only if the 27% -> 35% void increase is explicitly linked to the speed improvement (e.g. as a possible side-effect of pre-filled tax settings) AND invoice correctness is measured alongside speed. FAIL if the speed gain is reported as a success without this."
+    },
+    {
+      "id": "activation-denominator",
+      "type": "judge",
+      "category": "method",
+      "question": "Does the response identify that the 62% activation rate excludes the 41% who never complete setup and redefine activation over all sign-ups?",
+      "pass_criteria": "PASS only if the denominator problem is named and a corrected definition (over sign-ups, or reported alongside setup completion) is given. FAIL if 62% is used as the activation KPI as defined."
+    }
+  ]
+}
