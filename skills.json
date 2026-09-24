@@ -1,0 +1,83 @@
+{
+  "name": "journey-architecture-os",
+  "version": "1.0.0",
+  "license": "MIT",
+  "format": "Agent Skills",
+  "skills": [
+    {
+      "name": "customer-journey-mapping",
+      "path": "skills/customer-journey-mapping",
+      "description": "Creates evidence-backed customer journey maps that model a customer's goals, stages, actions, expectations, touchpoints, channels, friction, workarounds, emotions when evidenced, outcomes, and variations. Use for current-state, day-in-the-life, future-state, or scenario-based CJM work and when translating research into an end-to-end customer experience model."
+    },
+    {
+      "name": "employee-journey-mapping",
+      "path": "skills/employee-journey-mapping",
+      "description": "Creates evidence-backed employee journey maps across employee lifecycle events and real work episodes, including goals, manager and team interactions, policies, HR/IT services, tools, cultural and physical context, moments that matter, friction, outcomes, and enabling service dependencies. Use for EJM, employee experience, onboarding, internal mobility, performance, leave, workplace, or HR-service redesign."
+    },
+    {
+      "name": "experience-architecture",
+      "path": "skills/experience-architecture",
+      "description": "Orchestrates the full Journey Architecture OS suite from problem framing and evidence through CJM/EJM, service blueprinting, moments that matter, metrics, opportunity prioritization, target experience, governance, portfolio management, and quality audit. Use when the request is broad, cross-functional, enterprise-scale, or requires choosing and sequencing multiple journey/experience methods."
+    },
+    {
+      "name": "experience-opportunity-prioritization",
+      "path": "skills/experience-opportunity-prioritization",
+      "description": "Converts journey evidence, unmet outcomes, friction, and service root causes into solution-independent opportunity statements and prioritizes them using explicit evidence, reach, consequence, strategic relevance, feasibility, dependency, and risk. Use after CJM/EJM or service blueprinting when deciding what to address before generating features or initiatives."
+    },
+    {
+      "name": "jobs-and-outcomes",
+      "path": "skills/jobs-and-outcomes",
+      "description": "Frames what a customer, employee, or other actor is trying to accomplish using jobs, progress, context, desired outcomes, constraints, and success criteria independent of a specific solution. Use when journey stages are organization-centric, requirements are feature-led, user needs are vague, or opportunity statements need stronger outcome language."
+    },
+    {
+      "name": "journey-architecture",
+      "path": "skills/journey-architecture",
+      "description": "Defines and maintains a hierarchy of experience domains, lifecycles, journeys, episodes, and interactions with explicit actors, boundaries, stable IDs, states, and relationships. Use when scoping CJM/EJM work, decomposing an end-to-end experience, building a journey taxonomy or atlas, or deciding what should be one journey versus multiple linked journeys."
+    },
+    {
+      "name": "journey-governance",
+      "path": "skills/journey-governance",
+      "description": "Establishes operational governance for journey artifacts and outcomes, including ownership, lifecycle status, versioning, evidence freshness, review cadence, change control, metric stewardship, contributor roles, and links to initiatives. Use when journey maps must remain current, become enterprise assets, support recurring decisions, or avoid becoming abandoned workshop deliverables."
+    },
+    {
+      "name": "journey-metrics",
+      "path": "skills/journey-metrics",
+      "description": "Designs measurement trees for journeys and stages by linking actor outcomes, experience measures, behavior, operational drivers, employee/service signals, business outcomes, and guardrails. Use when a CJM/EJM needs KPIs, baselines, targets, instrumentation, health monitoring, or a causal measurement model rather than a list of disconnected metrics."
+    },
+    {
+      "name": "journey-portfolio-management",
+      "path": "skills/journey-portfolio-management",
+      "description": "Creates and manages an enterprise journey atlas or portfolio across actors, lifecycles, products, channels, teams, service capabilities, metrics, opportunities, and initiatives. Use when an organization has many journey maps, needs prioritization and coverage views, wants to detect duplication/dependencies, or needs journey management at portfolio scale."
+    },
+    {
+      "name": "journey-quality-audit",
+      "path": "skills/journey-quality-audit",
+      "description": "Audits customer journeys, employee journeys, service blueprints, and journey-management programs for scope, actor centricity, evidence quality, coherence, nonlinearity, service linkage, metrics, opportunity actionability, governance, and visual/model integrity. Use to review an existing CJM/EJM, detect AI-generated or workshop-only artifacts, or define a remediation plan."
+    },
+    {
+      "name": "journey-research",
+      "path": "skills/journey-research",
+      "description": "Plans, gathers, evaluates, and synthesizes qualitative, behavioral, operational, and contextual evidence for customer or employee journeys. Use before or during CJM/EJM work when assumptions must be validated, evidence sources must be triangulated, gaps identified, research questions created, or findings traced to journey claims."
+    },
+    {
+      "name": "journey-workshop-facilitation",
+      "path": "skills/journey-workshop-facilitation",
+      "description": "Plans and facilitates customer/employee journey, service blueprint, opportunity, or target-experience workshops with clear decisions, participant roles, evidence handling, divergence/convergence, bias controls, and post-workshop activation. Use when a team needs a workshop agenda or facilitation method without treating stakeholder consensus as customer or employee truth."
+    },
+    {
+      "name": "moments-that-matter",
+      "path": "skills/moments-that-matter",
+      "description": "Identifies and validates moments that have disproportionate influence on customer or employee outcomes, trust, confidence, retention, effort, recovery, or business value. Use when a journey has many touchpoints and the team needs to distinguish genuinely consequential moments from ordinary pain points or high-volume interactions."
+    },
+    {
+      "name": "service-blueprinting",
+      "path": "skills/service-blueprinting",
+      "description": "Builds service blueprints that connect customer or employee actions to frontstage interactions, backstage work, supporting processes, people, policies, data, systems, partners, automation, and AI. Use when a journey problem requires root-cause analysis, handoff analysis, operational redesign, service delivery architecture, or visibility into how an experience is produced."
+    },
+    {
+      "name": "target-experience-design",
+      "path": "skills/target-experience-design",
+      "description": "Designs evidence-informed target and transitional journey states using experience principles, desired outcomes, scenarios, service implications, capability gaps, assumptions, and experiments. Use after opportunity prioritization when creating a future-state CJM/EJM, service vision, North Star experience, transition roadmap, or testable target experience."
+    }
+  ]
+}

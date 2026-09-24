@@ -1,0 +1,2 @@
+journey_id,level,parent_id,actor,name,trigger,desired_outcome,state,status,owner,version,last_reviewed_at
+JRN-EXAMPLE-001,L2,,customer,Example journey,Example trigger,Example outcome,current,draft,,0.1,

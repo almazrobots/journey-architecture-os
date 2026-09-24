@@ -1,0 +1,2 @@
+journey_id,parent_id,level,actor,name,state,status,owner,evidence_freshness,metric_coverage,linked_opportunities,linked_initiatives,last_reviewed_at
+JRN-EXAMPLE-001,,L2,customer,Example journey,current,draft,,,,,,

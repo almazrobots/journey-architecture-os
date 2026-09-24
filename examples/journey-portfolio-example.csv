@@ -1,0 +1,5 @@
+journey_id,parent_id,level,actor,name,state,status,owner,evidence_freshness
+LFC-CUST-001,,L1,customer,Become and remain a customer,current,active,,current
+JRN-CUST-EVAL-001,LFC-CUST-001,L2,customer,Evaluate the service,current,active,,current
+JRN-CUST-ONBOARD-001,LFC-CUST-001,L2,customer,Start using the service,current,active,,needs-review
+JRN-CUST-SUPPORT-001,LFC-CUST-001,L2,customer,Resolve a service problem,current,active,,current
