@@ -1,0 +1,2460 @@
+{
+  "meta": {
+    "date": "2026-09-24",
+    "started_at": "2026-09-24T10:30:54",
+    "finished_at": "2026-09-24T10:32:28",
+    "mode": "routing",
+    "cmd": "claude -p --safe-mode --setting-sources '' --strict-mcp-config --disable-slash-commands --tools '' --no-session-persistence --system-prompt 'You are a helpful assistant. Answer the user'\"'\"'s message directly and completely. Do not ask clarifying questions; state assumptions instead.' --model claude-sonnet-5",
+    "model": "claude-sonnet-5",
+    "filters": {
+      "case": null,
+      "limit": null,
+      "repeats": 1
+    },
+    "model_calls": 111,
+    "commit": "a86837390f7e957379c8bb1bfaeaf0487a23aabf",
+    "dirty": false,
+    "changed_files": [],
+    "partial": false,
+    "release": true,
+    "loaded_files": {
+      "evals/distractors.json": "9ceef2320d17263ddead04bfd46ada6488b2374d6ab9e318354065e9c0a04135",
+      "evals/routing.jsonl": "8f73b68bb4c835851d0d35b4fafe71e6999294e86d5b28a5793bb93588ddcfd9",
+      "skills/customer-journey-mapping/SKILL.md": "f086578db63aec385b9d531eb754579c726ca12cf3598b1c44aa9c7a122bb9ed",
+      "skills/employee-journey-mapping/SKILL.md": "46eb15790ea219c1ccd186708b6d252e198875b6d0819aba633697fd1ab81719",
+      "skills/experience-architecture/SKILL.md": "11726ee1239b0d8fd76b2fe47f09165d5799953fdf13064f629fa8bc71ed09b1",
+      "skills/experience-opportunity-prioritization/SKILL.md": "aad33adf7c42c21f29e2597721c8c852b37260888bb45273fc5599810486faa7",
+      "skills/jobs-and-outcomes/SKILL.md": "61ca14349add24a9443eb3ee95239dd95421077ccac20e411eac781496ab0893",
+      "skills/journey-architecture/SKILL.md": "83e3c5c6f6fd3f003f2fe6a5ba48d5e36067deeba2e2973cbcb9f10ad63b98ca",
+      "skills/journey-governance/SKILL.md": "4b3cb1ba4ec452f310f21543a351f7436fd86e9df9971c12e27525531364e79b",
+      "skills/journey-metrics/SKILL.md": "ce5e9abf1c3b3aa0b7cb6a634fb3f4635518292dc0e6fcb371393d16e72a0dee",
+      "skills/journey-portfolio-management/SKILL.md": "c7779734573fba89c4786411dd8fc653b2e783ea794bf0051a83eddf3e14e98f",
+      "skills/journey-quality-audit/SKILL.md": "066af126ec8ff93fba0bd53934c638fd2ef6ca1c919dfacfdd63d80d3b6e950a",
+      "skills/journey-research/SKILL.md": "209d2e8c2088baa006eb10a0c3c4cb5f718b3cf34db31d9960a7a1c54a291a9c",
+      "skills/journey-workshop-facilitation/SKILL.md": "6f5237ad652b932a440d45a4de72f17095eedb59d1c9d76d8e1c46809245a768",
+      "skills/moments-that-matter/SKILL.md": "fcd0658230ea3530417115f65d1074e76b7f0cd93ea8fcfa0e46de6716fb9a94",
+      "skills/service-blueprinting/SKILL.md": "9ab1028cf1a126ff55d13e01b51db59ea9ea18e47e609b29bbc2f911f9370078",
+      "skills/target-experience-design/SKILL.md": "8f9b9edf0c41517a78b237cef3503144611d2089f36bde7579e575db2b564711"
+    }
+  },
+  "summary": {
+    "cases": 111,
+    "distractors": true,
+    "candidate_skills": 29,
+    "distractor_skills": 14,
+    "base_seed": 0,
+    "exact_accuracy": 0.982,
+    "acceptable_accuracy": 1.0,
+    "by_difficulty": {
+      "easy": {
+        "cases": 24,
+        "exact_accuracy": 1.0,
+        "acceptable_accuracy": 1.0
+      },
+      "hard": {
+        "cases": 87,
+        "exact_accuracy": 0.977,
+        "acceptable_accuracy": 1.0
+      }
+    },
+    "by_split": {
+      "heldout": {
+        "cases": 19,
+        "exact_accuracy": 1.0,
+        "acceptable_accuracy": 1.0
+      },
+      "development": {
+        "cases": 92,
+        "exact_accuracy": 0.9783,
+        "acceptable_accuracy": 1.0
+      }
+    },
+    "distractor_steals": 0,
+    "over_triggers": 0,
+    "errors": 0
+  },
+  "per_skill": {
+    "change-communications": {
+      "cases": 1,
+      "exact": 1,
+      "acceptable": 1,
+      "confusions": []
+    },
+    "customer-journey-mapping": {
+      "cases": 7,
+      "exact": 7,
+      "acceptable": 7,
+      "confusions": []
+    },
+    "employee-journey-mapping": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "experience-architecture": {
+      "cases": 9,
+      "exact": 8,
+      "acceptable": 9,
+      "confusions": [
+        {
+          "id": "RT-31-intent-quit-month-one",
+          "predicted": "employee-journey-mapping"
+        }
+      ]
+    },
+    "experience-opportunity-prioritization": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "incident-postmortem": {
+      "cases": 1,
+      "exact": 1,
+      "acceptable": 1,
+      "confusions": []
+    },
+    "itsm-service-desk": {
+      "cases": 1,
+      "exact": 1,
+      "acceptable": 1,
+      "confusions": []
+    },
+    "jobs-and-outcomes": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "journey-architecture": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "journey-governance": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "journey-metrics": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "journey-portfolio-management": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "journey-quality-audit": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "journey-research": {
+      "cases": 6,
+      "exact": 5,
+      "acceptable": 6,
+      "confusions": [
+        {
+          "id": "RT-46-multistep-research-first",
+          "predicted": "experience-architecture"
+        }
+      ]
+    },
+    "journey-workshop-facilitation": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "moments-that-matter": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "none": {
+      "cases": 6,
+      "exact": 6,
+      "acceptable": 6,
+      "confusions": []
+    },
+    "persona-creation": {
+      "cases": 1,
+      "exact": 1,
+      "acceptable": 1,
+      "confusions": []
+    },
+    "process-mapping": {
+      "cases": 3,
+      "exact": 3,
+      "acceptable": 3,
+      "confusions": []
+    },
+    "service-blueprinting": {
+      "cases": 7,
+      "exact": 7,
+      "acceptable": 7,
+      "confusions": []
+    },
+    "survey-design": {
+      "cases": 1,
+      "exact": 1,
+      "acceptable": 1,
+      "confusions": []
+    },
+    "target-experience-design": {
+      "cases": 7,
+      "exact": 7,
+      "acceptable": 7,
+      "confusions": []
+    },
+    "workshop-facilitation": {
+      "cases": 1,
+      "exact": 1,
+      "acceptable": 1,
+      "confusions": []
+    }
+  },
+  "confusion_pairs": [],
+  "acceptable_not_exact": [
+    {
+      "id": "RT-31-intent-quit-month-one",
+      "expected": "experience-architecture",
+      "predicted": "employee-journey-mapping"
+    },
+    {
+      "id": "RT-46-multistep-research-first",
+      "expected": "journey-research",
+      "predicted": "experience-architecture"
+    }
+  ],
+  "predicted_counts": {
+    "change-communications": 1,
+    "customer-journey-mapping": 7,
+    "employee-journey-mapping": 7,
+    "experience-architecture": 9,
+    "experience-opportunity-prioritization": 6,
+    "incident-postmortem": 1,
+    "itsm-service-desk": 1,
+    "jobs-and-outcomes": 6,
+    "journey-architecture": 6,
+    "journey-governance": 6,
+    "journey-metrics": 6,
+    "journey-portfolio-management": 6,
+    "journey-quality-audit": 6,
+    "journey-research": 5,
+    "journey-workshop-facilitation": 6,
+    "moments-that-matter": 6,
+    "none": 6,
+    "persona-creation": 1,
+    "process-mapping": 3,
+    "service-blueprinting": 7,
+    "survey-design": 1,
+    "target-experience-design": 7,
+    "workshop-facilitation": 1
+  },
+  "cases": [
+    {
+      "id": "RT-01-cjm-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 3031001137,
+      "expected": "customer-journey-mapping",
+      "acceptable": [],
+      "predicted": "customer-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"customer-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-02-ejm-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 1289301536,
+      "expected": "employee-journey-mapping",
+      "acceptable": [],
+      "predicted": "employee-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"employee-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-03-orchestrator-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 3517666029,
+      "expected": "experience-architecture",
+      "acceptable": [
+        "journey-portfolio-management",
+        "journey-governance"
+      ],
+      "predicted": "experience-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-04-prioritization-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 3706554055,
+      "expected": "experience-opportunity-prioritization",
+      "acceptable": [],
+      "predicted": "experience-opportunity-prioritization",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-opportunity-prioritization\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-05-jobs-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 3320532710,
+      "expected": "jobs-and-outcomes",
+      "acceptable": [],
+      "predicted": "jobs-and-outcomes",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"jobs-and-outcomes\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-06-architecture-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 602308100,
+      "expected": "journey-architecture",
+      "acceptable": [],
+      "predicted": "journey-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-07-governance-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 3967644216,
+      "expected": "journey-governance",
+      "acceptable": [],
+      "predicted": "journey-governance",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-governance\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-08-metrics-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 404875857,
+      "expected": "journey-metrics",
+      "acceptable": [],
+      "predicted": "journey-metrics",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-metrics\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-09-portfolio-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 1582389631,
+      "expected": "journey-portfolio-management",
+      "acceptable": [
+        "journey-architecture"
+      ],
+      "predicted": "journey-portfolio-management",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-portfolio-management\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-10-audit-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 1591091322,
+      "expected": "journey-quality-audit",
+      "acceptable": [],
+      "predicted": "journey-quality-audit",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-quality-audit\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-11-research-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 3067435056,
+      "expected": "journey-research",
+      "acceptable": [],
+      "predicted": "journey-research",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-research\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-12-workshop-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 497517553,
+      "expected": "journey-workshop-facilitation",
+      "acceptable": [],
+      "predicted": "journey-workshop-facilitation",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-workshop-facilitation\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-13-mtm-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 3497541173,
+      "expected": "moments-that-matter",
+      "acceptable": [],
+      "predicted": "moments-that-matter",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"moments-that-matter\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-14-blueprint-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 1043791649,
+      "expected": "service-blueprinting",
+      "acceptable": [],
+      "predicted": "service-blueprinting",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"service-blueprinting\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-15-target-clear",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 3170036049,
+      "expected": "target-experience-design",
+      "acceptable": [],
+      "predicted": "target-experience-design",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"target-experience-design\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-16-ambiguous-vague",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 3759115324,
+      "expected": "experience-architecture",
+      "acceptable": [],
+      "predicted": "experience-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-17-ambiguous-enterprise",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 2561887783,
+      "expected": "experience-architecture",
+      "acceptable": [
+        "journey-portfolio-management"
+      ],
+      "predicted": "experience-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-18-ambiguous-minimal",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 1253183071,
+      "expected": "experience-architecture",
+      "acceptable": [
+        "journey-architecture"
+      ],
+      "predicted": "experience-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-19-near-fix-first",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 235344943,
+      "expected": "experience-opportunity-prioritization",
+      "acceptable": [],
+      "predicted": "experience-opportunity-prioritization",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-opportunity-prioritization\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-20-near-design-future",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 4056275620,
+      "expected": "target-experience-design",
+      "acceptable": [],
+      "predicted": "target-experience-design",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"target-experience-design\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-21-near-ejm-for-manager",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2499380836,
+      "expected": "employee-journey-mapping",
+      "acceptable": [],
+      "predicted": "employee-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"employee-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-22-near-cjm-manager-actor",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 811869474,
+      "expected": "customer-journey-mapping",
+      "acceptable": [],
+      "predicted": "customer-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"customer-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-23-near-blueprint-vs-process",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1054098388,
+      "expected": "service-blueprinting",
+      "acceptable": [],
+      "predicted": "service-blueprinting",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"service-blueprinting\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-24-near-mtm-vs-painpoint",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2450775809,
+      "expected": "moments-that-matter",
+      "acceptable": [
+        "journey-research"
+      ],
+      "predicted": "moments-that-matter",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"moments-that-matter\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-25-neg-marketing-copy",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 601586316,
+      "expected": "none",
+      "acceptable": [],
+      "predicted": "none",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"none\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-26-neg-sql",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 70594234,
+      "expected": "none",
+      "acceptable": [],
+      "predicted": "none",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"none\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-27-neg-pixel-fix",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 100616848,
+      "expected": "none",
+      "acceptable": [],
+      "predicted": "none",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"none\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-28-neg-board-summary",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 1286476569,
+      "expected": "none",
+      "acceptable": [],
+      "predicted": "none",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"none\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-29-ru-cjm",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 952833045,
+      "expected": "customer-journey-mapping",
+      "acceptable": [],
+      "predicted": "customer-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"customer-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-30-de-blueprint",
+      "difficulty": "easy",
+      "heldout": false,
+      "seed": 4190985788,
+      "expected": "service-blueprinting",
+      "acceptable": [],
+      "predicted": "service-blueprinting",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"service-blueprinting\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-31-intent-quit-month-one",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2787057912,
+      "expected": "experience-architecture",
+      "acceptable": [
+        "journey-research",
+        "employee-journey-mapping"
+      ],
+      "predicted": "employee-journey-mapping",
+      "exact": false,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"employee-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-32-intent-churn-why",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3716760157,
+      "expected": "journey-research",
+      "acceptable": [
+        "experience-architecture"
+      ],
+      "predicted": "journey-research",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-research\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-33-process-bpmn-pure",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3324676936,
+      "expected": "process-mapping",
+      "acceptable": [],
+      "predicted": "process-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"process-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-34-process-word-blueprint",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1036064782,
+      "expected": "service-blueprinting",
+      "acceptable": [
+        "employee-journey-mapping"
+      ],
+      "predicted": "service-blueprinting",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"service-blueprinting\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-35-neg-heros-journey",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2678140803,
+      "expected": "none",
+      "acceptable": [],
+      "predicted": "none",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"none\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-36-neg-travel-journey",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3109117073,
+      "expected": "none",
+      "acceptable": [],
+      "predicted": "none",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"none\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-37-postmortem-outage",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1895826054,
+      "expected": "incident-postmortem",
+      "acceptable": [],
+      "predicted": "incident-postmortem",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"incident-postmortem\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-38-survey-wording",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2255439452,
+      "expected": "survey-design",
+      "acceptable": [],
+      "predicted": "survey-design",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"survey-design\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-39-journey-metrics-not-nps",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1371610543,
+      "expected": "journey-metrics",
+      "acceptable": [],
+      "predicted": "journey-metrics",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-metrics\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-40-persona-marketing",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3146602572,
+      "expected": "persona-creation",
+      "acceptable": [],
+      "predicted": "persona-creation",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"persona-creation\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-41-research-synthesis-not-persona",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2841470628,
+      "expected": "journey-research",
+      "acceptable": [],
+      "predicted": "journey-research",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-research\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-42-generic-workshop",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2395314289,
+      "expected": "workshop-facilitation",
+      "acceptable": [],
+      "predicted": "workshop-facilitation",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"workshop-facilitation\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-43-journey-workshop",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2146435767,
+      "expected": "journey-workshop-facilitation",
+      "acceptable": [],
+      "predicted": "journey-workshop-facilitation",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-workshop-facilitation\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-44-multistep-architecture-first",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 691699816,
+      "expected": "journey-architecture",
+      "acceptable": [
+        "experience-architecture",
+        "journey-portfolio-management"
+      ],
+      "predicted": "journey-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-45-multistep-audit-first",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1415183021,
+      "expected": "journey-quality-audit",
+      "acceptable": [
+        "experience-architecture"
+      ],
+      "predicted": "journey-quality-audit",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-quality-audit\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-46-multistep-research-first",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1848520093,
+      "expected": "journey-research",
+      "acceptable": [
+        "experience-architecture"
+      ],
+      "predicted": "experience-architecture",
+      "exact": false,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-47-itsm-desk",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2531705078,
+      "expected": "itsm-service-desk",
+      "acceptable": [],
+      "predicted": "itsm-service-desk",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"itsm-service-desk\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-48-change-comms",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3516415006,
+      "expected": "change-communications",
+      "acceptable": [],
+      "predicted": "change-communications",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"change-communications\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-49-es-mtm",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 265446809,
+      "expected": "moments-that-matter",
+      "acceptable": [],
+      "predicted": "moments-that-matter",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"moments-that-matter\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-50-ru-portfolio",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3752206227,
+      "expected": "journey-portfolio-management",
+      "acceptable": [
+        "journey-governance",
+        "journey-architecture"
+      ],
+      "predicted": "journey-portfolio-management",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-portfolio-management\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-51-heldout-swimlane-claims",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 800170422,
+      "expected": "service-blueprinting",
+      "acceptable": [],
+      "predicted": "service-blueprinting",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"service-blueprinting\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-52-heldout-bpmn-compliance",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 1937107486,
+      "expected": "process-mapping",
+      "acceptable": [],
+      "predicted": "process-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"process-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-53-heldout-repeat-info",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 3997263214,
+      "expected": "service-blueprinting",
+      "acceptable": [
+        "customer-journey-mapping"
+      ],
+      "predicted": "service-blueprinting",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"service-blueprinting\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-54-heldout-sop",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 2719955481,
+      "expected": "process-mapping",
+      "acceptable": [],
+      "predicted": "process-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"process-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-055-buyers-diary",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 1463865142,
+      "expected": "customer-journey-mapping",
+      "acceptable": [],
+      "predicted": "customer-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"customer-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-056-ward-transfer",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 3268912360,
+      "expected": "employee-journey-mapping",
+      "acceptable": [],
+      "predicted": "employee-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"employee-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-057-budget-proposals",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 841382305,
+      "expected": "experience-architecture",
+      "acceptable": [
+        "journey-portfolio-management",
+        "experience-opportunity-prioritization"
+      ],
+      "predicted": "experience-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-058-pick-three",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 282434497,
+      "expected": "experience-opportunity-prioritization",
+      "acceptable": [],
+      "predicted": "experience-opportunity-prioritization",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-opportunity-prioritization\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-059-tenant-backlog",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 2886366025,
+      "expected": "jobs-and-outcomes",
+      "acceptable": [],
+      "predicted": "jobs-and-outcomes",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"jobs-and-outcomes\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-060-mortgage-one-or-many",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 322760852,
+      "expected": "journey-architecture",
+      "acceptable": [],
+      "predicted": "journey-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-061-owners-freshness",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 2702633660,
+      "expected": "journey-governance",
+      "acceptable": [
+        "journey-portfolio-management"
+      ],
+      "predicted": "journey-governance",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-governance\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-062-new-patient-numbers",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 3642451850,
+      "expected": "journey-metrics",
+      "acceptable": [],
+      "predicted": "journey-metrics",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-metrics\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-063-overlapping-maps",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 1814210572,
+      "expected": "journey-portfolio-management",
+      "acceptable": [
+        "journey-architecture"
+      ],
+      "predicted": "journey-portfolio-management",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-portfolio-management\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-064-board-sanity",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 1647810230,
+      "expected": "journey-quality-audit",
+      "acceptable": [],
+      "predicted": "journey-quality-audit",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-quality-audit\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-065-switching-software",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 3047345038,
+      "expected": "journey-research",
+      "acceptable": [],
+      "predicted": "journey-research",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-research\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-066-frontline-vs-managers",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 3395658688,
+      "expected": "journey-workshop-facilitation",
+      "acceptable": [],
+      "predicted": "journey-workshop-facilitation",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-workshop-facilitation\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-067-business-account",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 716248634,
+      "expected": "moments-that-matter",
+      "acceptable": [],
+      "predicted": "moments-that-matter",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"moments-that-matter\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-068-replacement-card",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 2068768812,
+      "expected": "service-blueprinting",
+      "acceptable": [],
+      "predicted": "service-blueprinting",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"service-blueprinting\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-069-claims-two-years",
+      "difficulty": "hard",
+      "heldout": true,
+      "seed": 2213035185,
+      "expected": "target-experience-design",
+      "acceptable": [],
+      "predicted": "target-experience-design",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"target-experience-design\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-070-smb-payroll",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3163922053,
+      "expected": "customer-journey-mapping",
+      "acceptable": [
+        "jobs-and-outcomes"
+      ],
+      "predicted": "customer-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"customer-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-071-rebooking",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3442197451,
+      "expected": "customer-journey-mapping",
+      "acceptable": [
+        "journey-research"
+      ],
+      "predicted": "customer-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"customer-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-072-referral",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 480428915,
+      "expected": "customer-journey-mapping",
+      "acceptable": [],
+      "predicted": "customer-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"customer-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-073-store-managers",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 4065732258,
+      "expected": "employee-journey-mapping",
+      "acceptable": [],
+      "predicted": "employee-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"employee-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-074-parental-leave",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3227312587,
+      "expected": "employee-journey-mapping",
+      "acceptable": [],
+      "predicted": "employee-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"employee-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-075-policy-midshift",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1314508592,
+      "expected": "employee-journey-mapping",
+      "acceptable": [
+        "service-blueprinting"
+      ],
+      "predicted": "employee-journey-mapping",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"employee-journey-mapping\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-076-coo-q3",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1782942155,
+      "expected": "experience-architecture",
+      "acceptable": [
+        "journey-governance"
+      ],
+      "predicted": "experience-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-077-complaints-attrition",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2233171803,
+      "expected": "experience-architecture",
+      "acceptable": [
+        "journey-research"
+      ],
+      "predicted": "experience-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-078-merger",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 943374582,
+      "expected": "experience-architecture",
+      "acceptable": [
+        "journey-architecture"
+      ],
+      "predicted": "experience-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-079-competing-solutions",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3440742714,
+      "expected": "experience-opportunity-prioritization",
+      "acceptable": [],
+      "predicted": "experience-opportunity-prioritization",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-opportunity-prioritization\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-080-failure-points",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2877485073,
+      "expected": "experience-opportunity-prioritization",
+      "acceptable": [],
+      "predicted": "experience-opportunity-prioritization",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-opportunity-prioritization\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-081-okr-portal",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1658855429,
+      "expected": "experience-opportunity-prioritization",
+      "acceptable": [
+        "jobs-and-outcomes"
+      ],
+      "predicted": "experience-opportunity-prioritization",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"experience-opportunity-prioritization\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-082-better-booking",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 141853873,
+      "expected": "jobs-and-outcomes",
+      "acceptable": [],
+      "predicted": "jobs-and-outcomes",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"jobs-and-outcomes\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-083-pipeline-stages",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 744566507,
+      "expected": "jobs-and-outcomes",
+      "acceptable": [
+        "customer-journey-mapping"
+      ],
+      "predicted": "jobs-and-outcomes",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"jobs-and-outcomes\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-084-landlords",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2616732623,
+      "expected": "jobs-and-outcomes",
+      "acceptable": [],
+      "predicted": "jobs-and-outcomes",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"jobs-and-outcomes\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-085-sharpen-opps",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1778882708,
+      "expected": "jobs-and-outcomes",
+      "acceptable": [
+        "experience-opportunity-prioritization"
+      ],
+      "predicted": "jobs-and-outcomes",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"jobs-and-outcomes\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-086-naming-numbering",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1371137985,
+      "expected": "journey-architecture",
+      "acceptable": [
+        "journey-governance"
+      ],
+      "predicted": "journey-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-087-unreadable-map",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1267650380,
+      "expected": "journey-architecture",
+      "acceptable": [
+        "customer-journey-mapping"
+      ],
+      "predicted": "journey-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-088-citizen-portal",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2186010365,
+      "expected": "journey-architecture",
+      "acceptable": [
+        "experience-architecture"
+      ],
+      "predicted": "journey-architecture",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-architecture\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-089-conflicting-edits",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3112549688,
+      "expected": "journey-governance",
+      "acceptable": [],
+      "predicted": "journey-governance",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-governance\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-090-after-consultants",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1123136005,
+      "expected": "journey-governance",
+      "acceptable": [],
+      "predicted": "journey-governance",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-governance\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-091-monthly-review",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1539154470,
+      "expected": "journey-governance",
+      "acceptable": [
+        "journey-metrics"
+      ],
+      "predicted": "journey-governance",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-governance\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-092-versioning",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1951712411,
+      "expected": "journey-governance",
+      "acceptable": [],
+      "predicted": "journey-governance",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-governance\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-093-forty-kpis",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3614325526,
+      "expected": "journey-metrics",
+      "acceptable": [],
+      "predicted": "journey-metrics",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-metrics\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-094-returns-leading",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 681441737,
+      "expected": "journey-metrics",
+      "acceptable": [],
+      "predicted": "journey-metrics",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-metrics\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-095-enps-onboarding",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2461628754,
+      "expected": "journey-metrics",
+      "acceptable": [
+        "employee-journey-mapping"
+      ],
+      "predicted": "journey-metrics",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-metrics\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-096-orphans",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 1581928520,
+      "expected": "journey-portfolio-management",
+      "acceptable": [
+        "journey-governance"
+      ],
+      "predicted": "journey-portfolio-management",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-portfolio-management\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-097-initiative-overlap",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 77945921,
+      "expected": "journey-portfolio-management",
+      "acceptable": [],
+      "predicted": "journey-portfolio-management",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-portfolio-management\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-098-120-maps",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2116851363,
+      "expected": "journey-portfolio-management",
+      "acceptable": [
+        "experience-architecture"
+      ],
+      "predicted": "journey-portfolio-management",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-portfolio-management\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-099-ai-maps",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 991846920,
+      "expected": "journey-quality-audit",
+      "acceptable": [],
+      "predicted": "journey-quality-audit",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-quality-audit\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-100-blueprint-rigour",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3475158672,
+      "expected": "journey-quality-audit",
+      "acceptable": [],
+      "predicted": "journey-quality-audit",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-quality-audit\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-101-programme-review",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3597466344,
+      "expected": "journey-quality-audit",
+      "acceptable": [
+        "journey-governance"
+      ],
+      "predicted": "journey-quality-audit",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-quality-audit\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-102-trust-sources",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3649022692,
+      "expected": "journey-research",
+      "acceptable": [],
+      "predicted": "journey-research",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-research\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-103-target-sprint",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2458318350,
+      "expected": "journey-workshop-facilitation",
+      "acceptable": [
+        "target-experience-design"
+      ],
+      "predicted": "journey-workshop-facilitation",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-workshop-facilitation\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-104-exec-afternoon",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2327174994,
+      "expected": "journey-workshop-facilitation",
+      "acceptable": [
+        "moments-that-matter"
+      ],
+      "predicted": "journey-workshop-facilitation",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-workshop-facilitation\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-105-blueprint-session",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 526792528,
+      "expected": "journey-workshop-facilitation",
+      "acceptable": [
+        "service-blueprinting"
+      ],
+      "predicted": "journey-workshop-facilitation",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"journey-workshop-facilitation\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-106-nurse-first-year",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 4212825850,
+      "expected": "moments-that-matter",
+      "acceptable": [
+        "employee-journey-mapping"
+      ],
+      "predicted": "moments-that-matter",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"moments-that-matter\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-107-five-low-scores",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3984049847,
+      "expected": "moments-that-matter",
+      "acceptable": [
+        "journey-research"
+      ],
+      "predicted": "moments-that-matter",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"moments-that-matter\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-108-future-onboarding",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3618792598,
+      "expected": "target-experience-design",
+      "acceptable": [
+        "employee-journey-mapping"
+      ],
+      "predicted": "target-experience-design",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"target-experience-design\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-109-roadmap-to-experience",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 2454927032,
+      "expected": "target-experience-design",
+      "acceptable": [],
+      "predicted": "target-experience-design",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"target-experience-design\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-110-north-star",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3696651818,
+      "expected": "target-experience-design",
+      "acceptable": [],
+      "predicted": "target-experience-design",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"target-experience-design\"}\n",
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "RT-111-bare-future-state-cjm",
+      "difficulty": "hard",
+      "heldout": false,
+      "seed": 3977256465,
+      "expected": "target-experience-design",
+      "acceptable": [
+        "customer-journey-mapping"
+      ],
+      "predicted": "target-experience-design",
+      "exact": true,
+      "acceptable_hit": true,
+      "distractor_steal": false,
+      "over_trigger": false,
+      "attempts": [
+        {
+          "raw": "{\"skill\": \"target-experience-design\"}\n",
+          "error": null
+        }
+      ]
+    }
+  ]
+}
