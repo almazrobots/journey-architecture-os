@@ -123,7 +123,7 @@ class SandboxTest(unittest.TestCase):
 class FixtureTests(SandboxTest):
     def test_fixture_passes(self):
         out = self.assertPasses()
-        self.assertIn("OK: 15 skills, 13 schemas, 1 journey system validated", out)
+        self.assertIn("OK: 15 skills, 14 schemas, 1 journey system validated", out)
 
     def test_fixture_is_complete(self):
         names = sorted(p.name for p in FIXTURE.glob("*.csv"))
@@ -927,6 +927,7 @@ class ContractV3Tests(SandboxTest):
         self.set_cell("opportunity-register.csv", 0, "evidence_status", "inferred")
         self.set_cell("node-register.csv", 2, "evidence_ids", "EVD-2026-0002")
         self.set_cell("node-register.csv", 2, "evidence_status", "inferred")
+        self.set_cell("experience-register.csv", 2, "evidence_status", "inferred")
         self.assertPasses()
 
     def test_root_cause_status_needs_evidence(self):
@@ -1193,6 +1194,7 @@ class EvidenceDisciplineTests(SandboxTest):
         self.set_cell("node-register.csv", 1, "evidence_status", "inferred")
         self.set_cell("moment-register.csv", 0, "evidence_status", "inferred")
         self.set_cell("opportunity-register.csv", 0, "evidence_status", "inferred")
+        self.set_cell("experience-register.csv", 2, "evidence_status", "inferred")
         self.assertPasses()
 
 
@@ -2062,6 +2064,122 @@ class ReviewGapTests(SandboxTest):
         shutil.copy(self.system / "portfolio-register.csv", self.root / "examples" / "portfolio.csv")
         self.set_cell("portfolio.csv", 0, "metric_coverage", "1", base=self.root / "examples")
         self.assertFails("examples/portfolio.csv:2: metric_coverage applies to JRN rows only")
+
+
+EXP = "experience-register.csv"
+
+
+class ExperienceRegisterTests(SandboxTest):
+    """The optional experience register behind a map."""
+
+    def add_row(self, **values):
+        row = {"node_id": STAGE1, "row_type": "expectation", "text": "Expects a checklist", "evidence_status": "hypothesis"}
+        row.update(values)
+        self.append_row(EXP, row)
+
+    def test_register_is_optional(self):
+        (self.system / EXP).unlink()
+        self.assertPasses()
+
+    def test_template_is_header_only(self):
+        path = self.root / "skills" / "customer-journey-mapping" / "assets" / EXP
+        path.write_text(path.read_text(encoding="utf-8") + f"{STAGE1},action,Signs in,,unknown,\n", encoding="utf-8")
+        self.assertFails(f"skills/customer-journey-mapping/assets/{EXP}:2: a register template holds the header row only")
+
+    def test_row_type_enum(self):
+        self.set_cell(EXP, 0, "row_type", "feeling")
+        self.assertFails(f"{SYS}/{EXP}:2: column 'row_type': 'feeling' is not one of: action")
+
+    def test_text_required(self):
+        self.set_cell(EXP, 0, "text", "")
+        self.assertFails(f"{SYS}/{EXP}:2: required column 'text' is empty")
+
+    def test_evidence_status_required(self):
+        self.set_cell(EXP, 0, "evidence_status", "")
+        self.assertFails(f"{SYS}/{EXP}:2: required column 'evidence_status' is empty")
+
+    def test_duplicate_triple(self):
+        self.add_row(row_type="action", text="Opens the welcome email and signs in")
+        self.assertFails(
+            f"{SYS}/{EXP}:6: duplicate node_id+row_type+text {STAGE1} action Opens the welcome email and signs in (first on line 2)"
+        )
+
+    def test_same_text_other_row_type_passes(self):
+        self.add_row(row_type="question", text="Opens the welcome email and signs in")
+        self.assertPasses()
+
+    def test_node_must_exist(self):
+        self.set_cell(EXP, 2, "node_id", "NOD-CUST-SAAS-ONBOARD-001-09")
+        self.assertFails(f"{SYS}/{EXP}:4: node_id cites NOD-CUST-SAAS-ONBOARD-001-09, which is not in node-register.csv")
+
+    def test_evidence_must_exist(self):
+        self.set_cell(EXP, 0, "evidence_ids", "EVD-2026-0001;EVD-2026-0404")
+        self.assertFails(f"{SYS}/{EXP}:2: evidence_ids cites EVD-2026-0404")
+
+    def test_emotion_needs_valence(self):
+        self.set_cell(EXP, 1, "valence", "")
+        self.assertFails(f"{SYS}/{EXP}:3: an emotion row needs a valence from -2 to 2")
+
+    def test_valence_only_on_emotion(self):
+        self.set_cell(EXP, 0, "valence", "1")
+        self.assertFails(f"{SYS}/{EXP}:2: valence belongs to emotion rows only, not action")
+
+    def test_valence_range(self):
+        for bad in ("3", "-3", "1.5", "+1", "1\n"):
+            with self.subTest(value=bad):
+                self.tearDown()
+                self.setUp()
+                self.set_cell(EXP, 1, "valence", bad)
+                self.assertFails(f"{SYS}/{EXP}:3: column 'valence'")
+
+    def test_valence_values(self):
+        for good in ("-2", "-1", "0", "1", "2"):
+            self.set_cell(EXP, 1, "valence", good)
+            self.assertPasses()
+
+    def test_invalid_row_type_is_not_rechecked(self):
+        self.set_cell(EXP, 1, "row_type", "mood")
+        out = self.assertFails(f"{SYS}/{EXP}:3: column 'row_type'")
+        self.assertNotIn("valence", out)
+
+    def test_observed_row_needs_observed_evidence(self):
+        self.set_cell(EXP, 2, "evidence_ids", "EVD-2026-0003")
+        self.assertFails(f"{SYS}/{EXP}:4: evidence_status is observed but no cited evidence ID is observed")
+
+    def test_inferred_row_needs_supporting_evidence(self):
+        self.set_cell(EXP, 3, "evidence_status", "inferred")
+        self.assertFails(f"{SYS}/{EXP}:5: evidence_status is inferred but no cited evidence ID is observed or inferred")
+
+    def test_observed_emotion_from_analytics(self):
+        self.set_cell(EXP, 1, "evidence_ids", "EVD-2026-0002")
+        self.assertFails(
+            f"{SYS}/{EXP}:3: an observed emotion must cite an interview, observation, diary, survey, usability-test source"
+        )
+
+    def test_inferred_emotion_from_stakeholder_and_analytics(self):
+        self.set_cell("evidence-register.csv", 2, "evidence_status", "hypothesis")
+        self.set_cell(EXP, 1, "evidence_ids", "EVD-2026-0002;EVD-2026-0003")
+        self.set_cell(EXP, 1, "evidence_status", "inferred")
+        self.assertFails(f"{SYS}/{EXP}:3: an inferred emotion must cite an interview")
+
+    def test_emotion_from_each_first_hand_source(self):
+        for source in ("interview", "observation", "diary", "survey", "usability-test"):
+            with self.subTest(source=source):
+                self.set_cell("evidence-register.csv", 0, "source_type", source)
+                self.assertPasses()
+
+    def test_hypothesis_emotion_may_cite_nothing(self):
+        self.add_row(row_type="emotion", text="Anxious about the invoice", valence="-2", evidence_status="hypothesis")
+        self.add_row(row_type="emotion", text="Relieved", valence="2", evidence_status="unknown", node_id=STAGE2)
+        self.assertPasses()
+
+    def test_emotion_with_dangling_evidence_only(self):
+        self.set_cell(EXP, 1, "evidence_ids", "EVD-2026-0404")
+        self.assertFails("evidence_ids cites EVD-2026-0404", "an observed emotion must cite")
+
+    def test_register_in_view_scan_unaffected(self):
+        self.append_text(f"{SYS}/journey-view.md", f"\nExperience rows for {STAGE1}.\n")
+        self.assertPasses()
 
 
 class OntologySingleSourceTests(unittest.TestCase):

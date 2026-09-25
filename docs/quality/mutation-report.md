@@ -46,3 +46,7 @@ A mutant is killed when the test suite fails or times out on it.
 ## Verification after the full run
 
 The validator code has not changed since this full run; only tests were added. The one non-equivalent survivor (#46) was re-run with `python3 scripts/mutation_test.py --only 46` and is now killed. Final result: **1798 of 1808 killed (99.4%)**, 10 equivalent survivors, each listed above with its reason.
+
+## Targeted run: experience register (v2.1)
+
+The optional experience register added mutation sites (1882 in total now). A targeted run (`--only`, 2 workers) covered every mutant in the new or changed code: `check_experience`, `VALENCE_PATTERN`, `EMOTION_SOURCES`, `PATTERN_ROWS`, the `experience` entries in the register, key, ID-column, value-pattern, enumeration and evidence tables, and the call from `validate_system`. To keep the machine load low, it ran the tests that exercise that code (`ExperienceRegisterTests`, `FixtureTests`, `ContractTests`, `OntologySingleSourceTests`) rather than the whole suite. **Targeted score: 76 of 76 killed (100%).** The rest of the validator is unchanged since the last full run; a full run was not repeated.

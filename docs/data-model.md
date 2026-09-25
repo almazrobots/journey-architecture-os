@@ -24,6 +24,7 @@ A journey system is a set of CSV registers linked by stable IDs. A customer jour
 | Initiative / experiment | `INI-{NNNN}` | `initiative-register.csv` (target-experience-design) | A change that addresses one or more opportunities and is expected to move named metrics |
 | Portfolio entry | keyed by `journey_id` | `portfolio-register.csv` (journey-portfolio-management) | Management metadata for one hierarchy entry: freshness, metric coverage, and the opportunities and initiatives of its own journeys |
 | Governance record | keyed by `journey_id` | `governance-register.csv` (journey-governance) | Owner, evidence steward, metric owners, review cadence, triggers, and freshness rule |
+| Experience row (optional) | keyed by `node_id, row_type, text` | `experience-register.csv` (customer-journey-mapping) | What a map shows for one node: an action, touchpoint, channel, expectation, thought, pain, workaround, emotion (with `valence` −2…2), or question, with its evidence |
 | Change | `CHG-{NNNN}` | `change-log.csv` (journey-governance) | One material change to a governed journey, with reason, evidence, affected nodes, and approver |
 
 Each register template contains the header row only; column order is fixed by the ontology. List-valued cells separate IDs with `;` and no spaces. Dates are ISO 8601 (`YYYY-MM-DD`). Empty cells mean "not yet known"; a cell holding only whitespace is invalid.
@@ -65,6 +66,8 @@ erDiagram
     JOURNEY ||--o{ CHANGE : "changed_by"
     CHANGE }o--o{ NODE : "affects"
     CHANGE }o--o{ EVIDENCE : "cites"
+    EXPERIENCE_ROW }o--|| NODE : "describes"
+    EXPERIENCE_ROW }o--o{ EVIDENCE : "cites"
 
     JOURNEY {
         string journey_id PK
@@ -127,6 +130,14 @@ erDiagram
         string next_review_due
         string review_triggers "list"
     }
+    EXPERIENCE_ROW {
+        string node_id FK
+        string row_type
+        string text
+        string evidence_ids "list"
+        string evidence_status
+        string valence
+    }
     CHANGE {
         string change_id PK
         string journey_id FK
@@ -142,6 +153,7 @@ Reading the cardinalities:
 - A relation joins exactly two hierarchy entries or nodes; each endpoint is one journey-registry entry or one node.
 - Evidence and claims are many-to-many: one finding can support several nodes, relations, moments, metrics, metric edges, and opportunities, and one claim can cite several findings.
 - A moment that matters always points to exactly one node.
+- An experience row describes exactly one node. The experience register is optional; `valence` is filled on `emotion` rows only, and an `observed` or `inferred` emotion cites at least one interview, observation, diary, survey, or usability test.
 - A metric attaches to exactly one node, journey, lifecycle, or domain. Each journey with metrics has one actor-outcome root metric attached to the journey itself; every other metric reaches it through `drives` edges, except business metrics (driven by the root) and guardrails (which `protect` a metric). `drives` edges form no cycle.
 - An opportunity belongs to one primary journey and optionally one node; another journey reaches it through a relation, not by listing it. An initiative addresses at least one opportunity.
 - A portfolio entry links only opportunities of its own journeys (for lifecycles and domains, of the journeys below them) and initiatives that address one of those.

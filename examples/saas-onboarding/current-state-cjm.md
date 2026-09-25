@@ -72,6 +72,12 @@ The "proves-before-sharing" cluster rests on one source type. That is why the st
 
 ## Experience by stage
 
+The row-level experience layer, meaning actions, touchpoints, channels, expectations, thoughts, pains, workarounds, emotions and questions per stage and episode, lives in [experience-register.csv](experience-register.csv), 79 rows with a status on each. The table below summarises it.
+
+- **Emotion rows are sparse on purpose.** There are 7. Five are `inferred` from interviews or the survey, and two are `hypothesis`, one of them in the target journey. None is `observed`.
+- **Stages 1 and 4 have no emotion row.** No feeling-capable evidence exists for them, so a map drawn from the register shows a gap there, not a curve.
+- **Question rows** carry the actor's questions: observed ones from tickets and interviews, and `unknown` ones tied to registered evidence gaps (`EVD-2026-0023`, `EVD-2026-0024`, `EVD-2026-0025`, `EVD-2026-0018`).
+
 | Stage | What the admin does | Expectation (if researched) | Touchpoints (channel) | Friction and workarounds | Metrics | Opportunities |
 |---|---|---|---|---|---|---|
 | `NOD-CUST-SAAS-ONBOARD-001-01` | Opens welcome email, sets password, reads the set-up checklist | Not researched | Welcome email (email); checklist (product) | 11% have no login within 7 days; cause unknown. The 2025 checklist raised completion without a detectable outcome effect | `MET-0007` | `OPP-0007` |

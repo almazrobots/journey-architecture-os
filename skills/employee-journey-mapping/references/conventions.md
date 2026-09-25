@@ -60,6 +60,7 @@ Registers are CSV files, one per register. List-valued cells separate IDs with `
 | Nodes | `node-register.csv` | `journey-architecture` skill | `node_id,journey_id,parent_node_id,node_type,sequence,name,actor_goal,evidence_ids,evidence_status` |
 | Evidence | `evidence-register.csv` | `journey-research` skill | `evidence_id,source_type,source_reference,collected_at,population_or_sample,journey_id,node_id,finding,evidence_status,limitations` |
 | Moments | `moment-register.csv` | `moments-that-matter` skill | `moment_id,node_id,moment_type,outcome_at_stake,why_disproportionate,evidence_ids,evidence_status,metric_ids,failure_consequence,owner` |
+| Experience | `experience-register.csv` | `customer-journey-mapping` skill | `node_id,row_type,text,evidence_ids,evidence_status,valence` |
 
 Dates use ISO 8601 (`YYYY-MM-DD`). Empty cells mean "not yet known", except status columns: `evidence_status` and `root_cause_status` are always filled, with `unknown` when not assessed. A cell holding only whitespace is invalid. Files are UTF-8; a byte-order mark is tolerated. Each register ships as a template in the owning skill's assets folder, holding the header row only.
 
@@ -76,6 +77,8 @@ Dates use ISO 8601 (`YYYY-MM-DD`). Empty cells mean "not yet known", except stat
 | `source_type` | `interview`, `observation`, `diary`, `usability-test`, `survey`, `analytics`, `experiment`, `support-log`, `operational-record`, `document`, `stakeholder-input`, `other` |
 | `moment_type` | `decision`, `trust`, `transition`, `recovery`, `capability`, `relationship`, `high-risk` |
 | `relation` | `precedes`, `can_follow`, `branches_to`, `depends_on`, `shares_touchpoint_with`, `shares_capability_with`, `enables` |
+| `row_type` (experience) | `action`, `touchpoint`, `channel`, `expectation`, `thought`, `pain`, `workaround`, `emotion`, `question` |
+| `valence` (experience) | empty, or an integer from `-2` to `2` |
 
 ## Column rules
 
@@ -86,6 +89,7 @@ Dates use ISO 8601 (`YYYY-MM-DD`). Empty cells mean "not yet known", except stat
 - Node depth fixes its level and type: a node with no parent is a `stage` (L3); a node with a parent is an `episode`, `step`, or `interaction` (L4). `sequence` equals the number in the node ID's last segment.
 - On an evidence row, `journey_id` without `node_id` means the finding concerns the whole journey.
 - The relation register holds lateral relationships between hierarchy entries and nodes (`DOM`, `LFC`, `JRN`, or `NOD` IDs). Read a row as "`from_id` `relation` `to_id`": `precedes` (normally happens before), `can_follow` (may happen after), `branches_to` (an alternative path leads to), `depends_on` (cannot complete without), `shares_touchpoint_with`, `shares_capability_with`, `enables` (an employee or partner journey makes the other possible). Hierarchy is not a relation: it lives in `parent_id` and `parent_node_id`, and there is no `parent_of`. Journey versions are linked by `baseline_journey_id`, not by relations.
+- The experience register holds what a map shows per node: what the actor does (`action`), where (`touchpoint`, `channel`), expects (`expectation`), thinks (`thought`, a paraphrase or a quote marked as such), what hurts (`pain`), how they cope (`workaround`), how they feel (`emotion`), and what they ask in their own words (`question`: the actor's question, not a research question; research questions are `unknown` rows in the evidence register). Rows have no IDs; each (`node_id`, `row_type`, `text`) triple appears once. `valence` is required on `emotion` rows (−2 very negative … 2 very positive) and empty on all others. The experience register is optional: a journey system without it is valid, and a map renderer then shows only what the other registers hold.
 
 ## Referential rules
 
@@ -93,8 +97,9 @@ Dates use ISO 8601 (`YYYY-MM-DD`). Empty cells mean "not yet known", except stat
 - `parent_node_id` equals the node ID minus its last `-{NN}` segment, or is empty for stage-level nodes.
 - Every ID cited in `evidence_ids`, `metric_ids`, `moment_ids`, `opportunity_ids`, `expected_metric_ids`, `affected_node_ids`, `linked_*`, `node_id`, `parent_node_id`, `journey_id`, `journey_or_node_id`, `parent_id`, `baseline_journey_id`, `actor_id`, `from_id`, `to_id`, `from_metric_id`, or `to_metric_id` must exist in its register.
 - A parent sits at a lower level number than its child.
-- A row with `evidence_status = observed` must cite at least one evidence ID whose own status is `observed`; a row with `inferred` must cite at least one evidence ID whose status is `observed` or `inferred`. This applies to every register with an `evidence_ids` column: nodes, relations, moments, metrics, metric edges, and opportunities. `hypothesis` and `unknown` rows may cite nothing.
+- A row with `evidence_status = observed` must cite at least one evidence ID whose own status is `observed`; a row with `inferred` must cite at least one evidence ID whose status is `observed` or `inferred`. This applies to every register with an `evidence_ids` column: nodes, relations, moments, metrics, metric edges, opportunities, and experience rows. `hypothesis` and `unknown` rows may cite nothing.
 - The actor code in a `JRN` or `LFC` ID equals the actor code of its `actor_id`, and a journey's parent lifecycle carries the same actor code.
+- An `emotion` row with `evidence_status` `observed` or `inferred` must cite at least one evidence item whose `source_type` is `interview`, `observation`, `diary`, `survey`, or `usability-test`: documents, analytics, and stakeholder input cannot show how someone felt. Every `node_id` in the experience register exists in the node register.
 - `stakeholder-input` evidence has `evidence_status` `hypothesis` or `unknown`, never `inferred` or `observed`.
 - When a row cites both `journey_id` and `node_id`, the node belongs to that journey.
 - Links stay inside a journey's scope. A journey's scope is the journey, its nodes, and the lifecycle and domain above it. An opportunity belongs to a `current` journey; its `moment_ids` are moments on that journey's nodes, and its `metric_ids` are metrics attached within its scope. A moment's `metric_ids` are metrics attached within the scope of the moment's journey. An initiative's `expected_metric_ids` are metrics attached within the scope of a journey of one of the opportunities it addresses.

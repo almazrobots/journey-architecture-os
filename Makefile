@@ -1,4 +1,4 @@
-.PHONY: validate test mutation conventions evals-check
+.PHONY: validate test mutation conventions evals-check render
 
 validate:
 	python3 scripts/validate_repo.py
@@ -16,3 +16,7 @@ mutation:
 
 evals-check:
 	python3 scripts/run_evals.py --check
+
+# Render the flagship example as one self-contained HTML map into build/ (gitignored).
+render:
+	python3 scripts/render_map.py examples/saas-onboarding -o build/saas-onboarding-map.html

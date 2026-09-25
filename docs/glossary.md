@@ -52,6 +52,8 @@
 
 **Metric edge** — a row of the metric-edge register: a causal claim that one metric `drives` another, or that a guardrail metric `protects` another. Edges carry their own evidence status; correlation alone supports `inferred` at most. Together the edges form a journey's metric tree, rooted in one actor-outcome metric attached to the journey.
 
+**Experience register** — optional register of what a map shows per node: actions, touchpoints, channels, expectations, thoughts, pains, workarounds, emotions (with a valence from −2 to 2), and questions, each with its evidence and status. An emotion claimed as `observed` or `inferred` must rest on an interview, observation, diary, survey, or usability test.
+
 **Change log** — register of material changes to a governed journey model (`CHG-{NNNN}`): what changed, when, why, on what evidence, which nodes it affected, and who approved it.
 
 **JourneyOps** — the operational layer that keeps journeys current after mapping: ownership, versioning, evidence freshness, review cadence, metric stewardship, and portfolio decisions. In this repository: `journey-governance`, `journey-metrics`, `journey-portfolio-management`, with `journey-quality-audit` as the health check.

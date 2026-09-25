@@ -34,6 +34,7 @@ INITIATIVE = "initiative-register.csv"
 PORTFOLIO = "portfolio-register.csv"
 GOVERNANCE = "governance-register.csv"
 CHANGES = "change-log.csv"
+EXPERIENCE = "experience-register.csv"
 ALL = (
     ACTOR,
     JOURNEY,
@@ -48,6 +49,7 @@ ALL = (
     PORTFOLIO,
     GOVERNANCE,
     CHANGES,
+    EXPERIENCE,
 )
 
 # Registers each skill produces or consumes.
@@ -55,8 +57,8 @@ SKILL_REGISTERS = {
     "experience-architecture": ALL,
     "journey-architecture": ALL,
     "journey-research": (ACTOR, JOURNEY, NODE, EVIDENCE),
-    "customer-journey-mapping": (ACTOR, JOURNEY, RELATION, NODE, EVIDENCE, MOMENT),
-    "employee-journey-mapping": (ACTOR, JOURNEY, RELATION, NODE, EVIDENCE, MOMENT),
+    "customer-journey-mapping": (ACTOR, JOURNEY, RELATION, NODE, EVIDENCE, MOMENT, EXPERIENCE),
+    "employee-journey-mapping": (ACTOR, JOURNEY, RELATION, NODE, EVIDENCE, MOMENT, EXPERIENCE),
     "jobs-and-outcomes": (ACTOR, JOURNEY, NODE, EVIDENCE, METRIC),
     "service-blueprinting": (JOURNEY, RELATION, NODE, EVIDENCE, OPPORTUNITY),
     "moments-that-matter": (JOURNEY, NODE, EVIDENCE, MOMENT, METRIC),
@@ -114,6 +116,8 @@ ENUM_REGISTERS = {
     "metric relation": (EDGE,),
     "review_trigger": (GOVERNANCE,),
     "metric_coverage": (PORTFOLIO,),
+    "row_type (experience)": (EXPERIENCE,),
+    "valence (experience)": (EXPERIENCE,),
 }
 
 # Bullet opening -> registers it concerns (column clarifications and rules).
@@ -132,6 +136,8 @@ BULLET_REGISTERS = (
     ("In the governance register", (GOVERNANCE, CHANGES)),
     ("On an evidence row", (EVIDENCE,)),
     ("The relation register", (RELATION,)),
+    ("The experience register holds", (EXPERIENCE,)),
+    ("An `emotion` row", (EXPERIENCE,)),
     ("`node_id` must start", (NODE,)),
     ("`parent_node_id` equals", (NODE,)),
     ("Every ID cited", ALL),
@@ -175,8 +181,8 @@ def bullets_after(body, marker):
     for line in tail.splitlines():
         if line.startswith("- "):
             items.append(line[2:])
-        elif items and line.strip() == "":
-            break
+        elif items and line.strip():
+            break  # the list ends at the first non-bullet text; blank lines inside it are tolerated
     return items
 
 

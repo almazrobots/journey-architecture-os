@@ -95,6 +95,7 @@ Represent:
 
 ### 10. Attach evidence
 Each significant insight should reference `EVD-` evidence IDs.
+Record each node's actions, touchpoints, channels, expectations, thoughts, pains, workarounds, emotions, and questions as rows of `assets/experience-register.csv`, each with its evidence and status.
 
 ### 11. Identify candidate moments
 Do not automatically label every pain point a moment that matters. Route to `moments-that-matter`.
@@ -134,3 +135,4 @@ Produce:
 Read `references/conventions.md` for IDs, evidence statuses, and register columns.
 Read `references/map-types.md` when choosing map type.
 Use `assets/cjm-template.md`.
+Use `assets/experience-register.csv` for the per-node experience rows behind the map.

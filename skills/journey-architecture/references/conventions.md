@@ -67,6 +67,7 @@ Registers are CSV files, one per register. List-valued cells separate IDs with `
 | Portfolio | `portfolio-register.csv` | `journey-portfolio-management` skill | `journey_id,parent_id,level,actor_id,name,state,status,owner,evidence_freshness,metric_coverage,linked_opportunities,linked_initiatives,last_reviewed_at` |
 | Governance | `governance-register.csv` | `journey-governance` skill | `journey_id,owner,evidence_steward,metric_owners,review_interval_days,last_reviewed_at,next_review_due,review_triggers,freshness_rule` |
 | Change log | `change-log.csv` | `journey-governance` skill | `change_id,journey_id,changed_at,version,change,reason,evidence_ids,affected_node_ids,approved_by` |
+| Experience | `experience-register.csv` | `customer-journey-mapping` skill | `node_id,row_type,text,evidence_ids,evidence_status,valence` |
 
 Dates use ISO 8601 (`YYYY-MM-DD`). Empty cells mean "not yet known", except status columns: `evidence_status` and `root_cause_status` are always filled, with `unknown` when not assessed. A cell holding only whitespace is invalid. Files are UTF-8; a byte-order mark is tolerated. Each register ships as a template in the owning skill's assets folder, holding the header row only.
 
@@ -90,6 +91,8 @@ Dates use ISO 8601 (`YYYY-MM-DD`). Empty cells mean "not yet known", except stat
 | `relation` | `precedes`, `can_follow`, `branches_to`, `depends_on`, `shares_touchpoint_with`, `shares_capability_with`, `enables` |
 | `metric relation` | `drives`, `protects` |
 | `review_trigger` | `major-service-change`, `policy-change`, `channel-launch`, `metric-shift`, `incident`, `organizational-change`, `new-research` |
+| `row_type` (experience) | `action`, `touchpoint`, `channel`, `expectation`, `thought`, `pain`, `workaround`, `emotion`, `question` |
+| `valence` (experience) | empty, or an integer from `-2` to `2` |
 | `metric_coverage` | empty, or a decimal from `0` to `1` with up to two decimals: `0`, `0.8`, `0.75`, `1` |
 
 ## Column rules
@@ -108,6 +111,7 @@ Dates use ISO 8601 (`YYYY-MM-DD`). Empty cells mean "not yet known", except stat
 - In the governance register, `metric_owners` lists the roles that own the journey's metrics (the per-metric owner stays in the metric register) and `review_triggers` lists trigger values, both `;`-separated; `review_interval_days` is a positive integer; `next_review_due` is on or after `last_reviewed_at`. The change log records every material change to a governed journey with its reason, evidence, affected nodes, and approver.
 - On an evidence row, `journey_id` without `node_id` means the finding concerns the whole journey.
 - The relation register holds lateral relationships between hierarchy entries and nodes (`DOM`, `LFC`, `JRN`, or `NOD` IDs). Read a row as "`from_id` `relation` `to_id`": `precedes` (normally happens before), `can_follow` (may happen after), `branches_to` (an alternative path leads to), `depends_on` (cannot complete without), `shares_touchpoint_with`, `shares_capability_with`, `enables` (an employee or partner journey makes the other possible). Hierarchy is not a relation: it lives in `parent_id` and `parent_node_id`, and there is no `parent_of`. Journey versions are linked by `baseline_journey_id`, not by relations.
+- The experience register holds what a map shows per node: what the actor does (`action`), where (`touchpoint`, `channel`), expects (`expectation`), thinks (`thought`, a paraphrase or a quote marked as such), what hurts (`pain`), how they cope (`workaround`), how they feel (`emotion`), and what they ask in their own words (`question`: the actor's question, not a research question; research questions are `unknown` rows in the evidence register). Rows have no IDs; each (`node_id`, `row_type`, `text`) triple appears once. `valence` is required on `emotion` rows (−2 very negative … 2 very positive) and empty on all others. The experience register is optional: a journey system without it is valid, and a map renderer then shows only what the other registers hold.
 
 ## Referential rules
 
@@ -115,9 +119,10 @@ Dates use ISO 8601 (`YYYY-MM-DD`). Empty cells mean "not yet known", except stat
 - `parent_node_id` equals the node ID minus its last `-{NN}` segment, or is empty for stage-level nodes.
 - Every ID cited in `evidence_ids`, `metric_ids`, `moment_ids`, `opportunity_ids`, `expected_metric_ids`, `affected_node_ids`, `linked_*`, `node_id`, `parent_node_id`, `journey_id`, `journey_or_node_id`, `parent_id`, `baseline_journey_id`, `actor_id`, `from_id`, `to_id`, `from_metric_id`, or `to_metric_id` must exist in its register.
 - A parent sits at a lower level number than its child.
-- A row with `evidence_status = observed` must cite at least one evidence ID whose own status is `observed`; a row with `inferred` must cite at least one evidence ID whose status is `observed` or `inferred`. This applies to every register with an `evidence_ids` column: nodes, relations, moments, metrics, metric edges, and opportunities. `hypothesis` and `unknown` rows may cite nothing.
+- A row with `evidence_status = observed` must cite at least one evidence ID whose own status is `observed`; a row with `inferred` must cite at least one evidence ID whose status is `observed` or `inferred`. This applies to every register with an `evidence_ids` column: nodes, relations, moments, metrics, metric edges, opportunities, and experience rows. `hypothesis` and `unknown` rows may cite nothing.
 - The actor code in a `JRN` or `LFC` ID equals the actor code of its `actor_id`, and a journey's parent lifecycle carries the same actor code.
 - A portfolio row's `linked_opportunities` belong to that entry's journeys (for `LFC` and `DOM` rows, to journeys below them; for a `target` or `transitional` journey, to its `baseline_journey_id`, whose opportunities it realizes), and its `linked_initiatives` address at least one of those opportunities.
+- An `emotion` row with `evidence_status` `observed` or `inferred` must cite at least one evidence item whose `source_type` is `interview`, `observation`, `diary`, `survey`, or `usability-test`: documents, analytics, and stakeholder input cannot show how someone felt. Every `node_id` in the experience register exists in the node register.
 - Metric edges never point from a metric to itself, each (`from_metric_id`, `relation`, `to_metric_id`) triple appears once, and `drives` edges contain no cycle.
 - `stakeholder-input` evidence has `evidence_status` `hypothesis` or `unknown`, never `inferred` or `observed`.
 - When a row cites both `journey_id` and `node_id`, the node belongs to that journey.

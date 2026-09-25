@@ -72,6 +72,7 @@ ID_TOKEN_RE = re.compile(
 DATE_PATTERN = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
 POSITIVE_INT_PATTERN = "^[1-9][0-9]*$"
 COVERAGE_PATTERN = r"^(0(\.[0-9]{1,2})?|1(\.0{1,2})?)?$"
+VALENCE_PATTERN = "^(-2|-1|0|1|2)$"
 
 # Register name (schema file stem) -> CSV file name (ontology "File" column).
 REGISTERS = {
@@ -88,6 +89,7 @@ REGISTERS = {
     "portfolio": "portfolio-register.csv",
     "governance": "governance-register.csv",
     "change-log": "change-log.csv",
+    "experience": "experience-register.csv",
 }
 # Single-column identity of each keyed register.
 PRIMARY_KEY = {
@@ -109,6 +111,7 @@ KEYED_BY_JOURNEY = ("portfolio", "governance")
 KEY_COLUMNS = {name: (col,) for name, col in PRIMARY_KEY.items()}
 KEY_COLUMNS["relation"] = ("from_id", "relation", "to_id")
 KEY_COLUMNS["metric-edge"] = ("from_metric_id", "relation", "to_metric_id")
+KEY_COLUMNS["experience"] = ("node_id", "row_type", "text")
 # Endpoint columns of edge registers, which must differ.
 EDGE_ENDS = {
     "relation": ("from_id", "to_id"),
@@ -177,6 +180,8 @@ ID_COLUMNS = {
     ("change-log", "journey_id"): (JOURNEY_PREFIXES, False),
     ("change-log", "evidence_ids"): (("EVD",), True),
     ("change-log", "affected_node_ids"): (("NOD",), True),
+    ("experience", "node_id"): (("NOD",), False),
+    ("experience", "evidence_ids"): (("EVD",), True),
 }
 DATE_COLUMNS = {
     ("journey", "last_reviewed_at"),
@@ -191,6 +196,7 @@ VALUE_PATTERNS = {
     ("node", "sequence"): POSITIVE_INT_PATTERN,
     ("portfolio", "metric_coverage"): COVERAGE_PATTERN,
     ("governance", "review_interval_days"): POSITIVE_INT_PATTERN,
+    ("experience", "valence"): VALENCE_PATTERN,
 }
 VALUE_PATTERNS.update({col: DATE_PATTERN for col in DATE_COLUMNS})
 # Ontology enumeration label -> the register columns it governs.
@@ -204,6 +210,7 @@ ENUM_COLUMNS = {
         ("metric-edge", "evidence_status"),
         ("opportunity", "evidence_status"),
         ("opportunity", "root_cause_status"),
+        ("experience", "evidence_status"),
     ],
     "level": [("journey", "level"), ("portfolio", "level")],
     "state": [("journey", "state"), ("portfolio", "state")],
@@ -222,11 +229,12 @@ ENUM_COLUMNS = {
     ],
     "relation": [("relation", "relation")],
     "metric relation": [("metric-edge", "relation")],
+    "row_type (experience)": [("experience", "row_type")],
 }
 # Enumerations used as ';'-separated lists: (register, column) -> label.
 ENUM_LIST_COLUMNS = {("governance", "review_triggers"): "review_trigger"}
 # Enumerations-table rows that document a value grammar, not an enum.
-PATTERN_ROWS = {"metric_coverage": COVERAGE_PATTERN}
+PATTERN_ROWS = {"metric_coverage": COVERAGE_PATTERN, "valence (experience)": VALENCE_PATTERN}
 # Level implied by each journey-registry prefix. L3/L4 are nodes and live in
 # the node register, so journey-registry and portfolio levels are L0-L2 only.
 PREFIX_LEVEL = {"DOM": "L0", "LFC": "L1", "JRN": "L2"}
@@ -243,7 +251,10 @@ EVIDENCED = {
     "metric": ("evidence_status",),
     "metric-edge": ("evidence_status",),
     "opportunity": ("evidence_status", "root_cause_status"),
+    "experience": ("evidence_status",),
 }
+# Sources that can show how someone felt; an emotion claim needs one of them.
+EMOTION_SOURCES = ("interview", "observation", "diary", "survey", "usability-test")
 # Status columns are always filled; `unknown` means not assessed.
 STATUS_COLUMNS = ("evidence_status", "root_cause_status")
 # Portfolio rows restate these journey-registry fields and must agree.
@@ -1357,6 +1368,31 @@ def check_evidence_discipline(sys_):
             )
 
 
+def check_experience(sys_):
+    """valence belongs to emotion rows only; felt emotions need first-hand sources."""
+    for row in sys_.get("experience"):
+        row_type = row.get("row_type")
+        if row_type is None:
+            continue
+        has_valence = "valence" in row.data
+        if row_type == "emotion" and not has_valence:
+            sys_.error("experience", row, "an emotion row needs a valence from -2 to 2")
+        elif row_type != "emotion" and has_valence:
+            sys_.error("experience", row, f"valence belongs to emotion rows only, not {row_type}")
+        if row_type == "emotion" and row.get("evidence_status") in CITATION_NEEDS:
+            sources = {
+                e.get("source_type")
+                for e in (sys_.ids["evidence"].get(x) for x in row.ids("evidence_ids"))
+                if e is not None
+            }
+            if not sources & set(EMOTION_SOURCES):
+                sys_.error(
+                    "experience",
+                    row,
+                    f"an {row.get('evidence_status')} emotion must cite an {', '.join(EMOTION_SOURCES)} source; documents, analytics and stakeholder input cannot show how someone felt",
+                )
+
+
 def check_edges(sys_):
     for name, (start, end) in EDGE_ENDS.items():
         for row in sys_.get(name):
@@ -1560,6 +1596,7 @@ def validate_system(directory, schemas, report):
     check_node_journeys(sys_)
     check_scopes(sys_)
     check_evidence_discipline(sys_)
+    check_experience(sys_)
     check_edges(sys_)
     check_portfolio(sys_)
     check_coverage(sys_)

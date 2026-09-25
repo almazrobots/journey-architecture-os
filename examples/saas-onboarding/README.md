@@ -2,7 +2,7 @@
 
 > **Fictional example.** Ledgerly, its customers, staff, numbers, interviews and quotes are invented to show the method. Nothing here is research evidence about any real product or market, and Ledgerly is not modeled on a real company.
 
-One journey system built end to end with Journey Architecture OS, from evidence to a funding recommendation, joined by stable IDs across 13 registers.
+One journey system built end to end with Journey Architecture OS, from evidence to a funding recommendation, joined by stable IDs across 13 registers plus the optional experience register.
 
 ## The situation and the decision
 
@@ -26,7 +26,7 @@ Views cite register IDs; when a view and a register disagree, the register wins.
 | 1 | [engagement-brief.md](engagement-brief.md) | `experience-architecture` | Decision, actor, scope, definition of done |
 | 2 | [journey-registry.csv](journey-registry.csv), [actor-register.csv](actor-register.csv), [relation-register.csv](relation-register.csv) | `journey-architecture` | Where the journey sits, its versions and neighbours, who the actors are |
 | 3 | [evidence-register.csv](evidence-register.csv) | `journey-research` | What is known, from which source, with what limits |
-| 4 | [current-state-cjm.md](current-state-cjm.md) + [node-register.csv](node-register.csv) | `customer-journey-mapping` | What admins do today, stage by stage, and how firm each stage is |
+| 4 | [current-state-cjm.md](current-state-cjm.md) + [node-register.csv](node-register.csv) + [experience-register.csv](experience-register.csv) | `customer-journey-mapping` | What admins do, think and feel today, stage by stage, and how firm each claim is |
 | 5 | [service-blueprint.md](service-blueprint.md) | `service-blueprinting` | How the critical episode is produced, and two root-cause trees |
 | 6 | [moments-that-matter.md](moments-that-matter.md) + [moment-register.csv](moment-register.csv) | `moments-that-matter` | Which three moments carry disproportionate consequence |
 | 7 | [metric-tree.md](metric-tree.md) + [metric-register.csv](metric-register.csv) + [metric-edge-register.csv](metric-edge-register.csv) | `journey-metrics` | What is measured, how valid each measure is, and which causal links are assumptions |
@@ -154,7 +154,7 @@ The last row is kept to show a claim that did not survive contact with behaviour
 4. **Whether team value causes retention.** `MET-0001 → MET-0009` is `inferred` on a confounded comparison (`EVD-2026-0016`).
 5. **What customers call "the team is using it".** The `MET-0001` threshold is an analytics convention; its validity is `inferred`, not `observed`.
 6. **Customer and item import** (`NOD-CUST-SAAS-ONBOARD-001-02-03`) is `unknown`; 9% of tickets mention it and nobody researched it.
-7. **Emotion.** No emotion curve. Two experience claims (waiting without a date; not trusting totals) trace to interviews; anything more would be decoration.
+7. **Emotion.** The experience register has 7 emotion rows and none is `observed`: five are `inferred` from interviews or the survey, and two are `hypothesis`. Stages 1 and 4 have no emotion row, so a rendered curve has gaps there instead of invented points.
 8. **Guardrail baselines** (`MET-0016`, `MET-0011`, `MET-0012`, `MET-0014`) do not exist yet, and the third ledger has no change feed at all (`EVD-2026-0022`). This is why shipping waits on `INI-0004` and is limited to two ledgers.
 9. **Any causal effect at all.** No `drives` edge is `observed`. The only experiment (`EVD-2026-0015`) could not detect effects under about 13 points.
 10. **Whether any pilot can show safety.** At current intake, non-inferiority at 5 corrections per 1,000 needs about 790 accounts per arm, so the pilot screens only for gross harm.

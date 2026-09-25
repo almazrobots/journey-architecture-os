@@ -84,6 +84,7 @@ Especially:
 ### 8. Add evidence and experience
 Collect and report employee evidence under `references/employee-research-ethics.md` (voluntariness, reporting thresholds, no manager access to raw data).
 Never infer morale, engagement, or emotion from process delay alone. HR, manager, and leadership accounts of the employee experience are `stakeholder-input` and support `hypothesis` at most.
+Record per-stage actions, expectations, pains, workarounds, and emotions as rows of the experience register (columns in the conventions card); an emotion row claimed as `observed` or `inferred` must cite an interview, observation, diary, survey, or usability test.
 
 ### 9. Identify moments that matter
 Route candidates to `moments-that-matter`.

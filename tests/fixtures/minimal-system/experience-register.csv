@@ -1,0 +1,5 @@
+node_id,row_type,text,evidence_ids,evidence_status,valence
+NOD-CUST-SAAS-ONBOARD-001-01,action,Opens the welcome email and signs in,EVD-2026-0001,observed,
+NOD-CUST-SAAS-ONBOARD-001-01,emotion,Frustrated when single sign-on setup fails,EVD-2026-0001,observed,-1
+NOD-CUST-SAAS-ONBOARD-001-02,pain,Few colleagues join in the first week,EVD-2026-0002,observed,
+NOD-CUST-SAAS-ONBOARD-001-02-01,thought,"""I will not type in twenty users by hand"" (paraphrase)",EVD-2026-0003,hypothesis,
